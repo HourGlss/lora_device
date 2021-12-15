@@ -2,11 +2,6 @@ import busio
 import board
 import time
 
-
-##
-## INSIDE D:LIB
-##
-
 class RYLR896:
     __debug = None
 
