@@ -20,17 +20,16 @@ class ReceivedMessage(object):
         self.snr = signal_noise_ratio
         m = hashlib.sha256()
         m.update(address)
-        m.update(payload_length)
         m.update(actual_data)
-        self.msg_hash = m.hexdigest()
+        self.msg_hash = m.digest()
 
     def get_dictionary(self):
         return {
-            "address":self.addr,
-            "length":self.pl,
+            "address":int(self.addr),
+            "length":int(self.pl),
             "data":self.dat,
-            "rssi":self.rssi,
-            "snr":self.snr,
+            "rssi":int(self.rssi),
+            "snr":int(self.snr),
             "hash":self.msg_hash
         }
 
@@ -39,13 +38,13 @@ class RYLR896:
     __debug = None
 
     def __init__(self, tx=None, rx=None, timeout=.5, debug=False, name=None, repeater=False):
-        print("This is a test")
         if name is None:
             self.name = self.__class__.__name__
         else:
             self.name = name
         self.__debug = debug
         assert rx is not None and tx is not None
+        self.check = False
         self.timeout = timeout
         self.set_device_timeout()
         self.uart = busio.UART(rx=rx, tx=tx, baudrate=115200, receiver_buffer_size=2048, timeout=timeout)
@@ -62,8 +61,10 @@ class RYLR896:
             self.bandwidth = 7
             self.coding_rate = 1
             self.programmed_preamble = 4
+            self.check = True
         else:
             print("Failed to establish communication with {}".format(self.name))
+            self.check = False
 
     def set_device_timeout(self, timeout_to_use: float = .5):
         self.timeout = timeout_to_use
@@ -77,14 +78,14 @@ class RYLR896:
             now = time.time()
             data = self.uart.read()
             if data is not None:
-                print("cmd breaking due to data not None")
+                print("cmd breaking due to data not None {}".format(data))
                 break
             if now - start > self.timeout:
                 print("cmd breaking due to timeout")
                 break
         try:
             if data is not None:
-                print("data is not None {}".format(data))
+                # print("data is not None {}".format(data))
                 data = data.decode().replace("\r\n", "")
                 return data
             else:
@@ -312,7 +313,6 @@ class RYLR896:
             pass
         else:
             raise "Bad network id. Must be 0-16"
-
         cmd_to_use = "AT+NETWORKID={}".format(network_id_to_use)
         if self.__debug:
             print("set_network_id sending: {}".format(cmd_to_use))
@@ -413,14 +413,24 @@ class RYLR896:
             now = time.time()
             data = self.uart.read()
             if data is not None:
+                print("{} send reply breaking due to data not None {}".format(self.name,data))
                 break
             if now - start > 3:
                 if self.__debug:
                     print("{} send reply timing out".format(self.name))
                 break
         reply = data
+        try:
+            reply = reply.decode().replace("\r\n","")
+        except:
+            if self.__debug:
+                print("reply cant decode")
+            return False
         if self.__debug:
             print("{} send reply: {}".format(self.name, reply))
+        if reply == "+OK":
+             return True
+        return False
 
     def get_last_sent(self):
         cmd_to_use = "AT+SEND?"
