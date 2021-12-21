@@ -2,10 +2,44 @@ import busio
 import board
 import time
 
+try:
+    import adafruit_hashlib as hashlib
+except:
+    import hashlib
+
+
+class ReceivedMessage(object):
+
+    def __init__(self, address: int = None, payload_length: int = None, actual_data: str = None,
+                 received_signal_strength_indicator: int = None,
+                 signal_noise_ratio: int = None):
+        self.addr = address
+        self.pl = payload_length
+        self.dat = actual_data
+        self.rssi = received_signal_strength_indicator
+        self.snr = signal_noise_ratio
+        m = hashlib.sha256()
+        m.update(address)
+        m.update(payload_length)
+        m.update(actual_data)
+        self.msg_hash = m.hexdigest()
+
+    def get_dictionary(self):
+        return {
+            "address":self.addr,
+            "length":self.pl,
+            "data":self.dat,
+            "rssi":self.rssi,
+            "snr":self.snr,
+            "hash":self.msg_hash
+        }
+
+
 class RYLR896:
     __debug = None
 
-    def __init__(self, tx=None, rx=None, timeout=.5, debug=False, name=None):
+    def __init__(self, tx=None, rx=None, timeout=.5, debug=False, name=None, repeater=False):
+        print("This is a test")
         if name is None:
             self.name = self.__class__.__name__
         else:
@@ -14,7 +48,7 @@ class RYLR896:
         assert rx is not None and tx is not None
         self.timeout = timeout
         self.set_device_timeout()
-        self.uart = busio.UART(rx=rx, tx=tx, baudrate=115200, receiver_buffer_size=2048, timeout=0.1)
+        self.uart = busio.UART(rx=rx, tx=tx, baudrate=115200, receiver_buffer_size=2048, timeout=timeout)
         if self.test_device():
             self.factory_reset()
             print("{} is factory reset and ready to use".format(self.name))
@@ -43,12 +77,18 @@ class RYLR896:
             now = time.time()
             data = self.uart.read()
             if data is not None:
+                print("cmd breaking due to data not None")
                 break
             if now - start > self.timeout:
+                print("cmd breaking due to timeout")
                 break
         try:
-            data = data.decode().replace("\r\n", "")
-            return data
+            if data is not None:
+                print("data is not None {}".format(data))
+                data = data.decode().replace("\r\n", "")
+                return data
+            else:
+                return None
         except Exception as e:
 
             print("{} had a failure".format(self.name))
@@ -57,13 +97,23 @@ class RYLR896:
 
     def read_from_device(self):
         data = None
+        start = time.time()
         while True:
+            now = time.time()
             data = self.uart.read()
             if data is not None:
                 break
+            if now - start > self.timeout:
+                break
         try:
             data = data.decode().replace("\r\n", "")
-            return data
+            if "+RCV" in data:
+                address, payload_length, data, rssi, snr = data[len("+RCV="):].split(',')
+                msg = ReceivedMessage(address=address, payload_length=payload_length, actual_data=data,
+                                      received_signal_strength_indicator=rssi, signal_noise_ratio=snr)
+                return msg.get_dictionary()
+            else:
+                print("read_from_device SOMETHING WENT WRONG")
         except:
             return data
 
@@ -407,7 +457,7 @@ class RYLR896:
         if self.__debug:
             print("get_UID reply: {}".format(reply))
         if reply.startswith("+UID="):
-            response = reply[len('+UID='):]
+            response = reply[len('+UID='):].replace("\r\n","")
             return response
         else:
             return None
