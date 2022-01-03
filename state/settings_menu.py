@@ -1,7 +1,7 @@
 from state.state import AbstractState
 
 
-class ComposeMenu(AbstractState):
+class SettingsMenu(AbstractState):
 
     def __init__(self, d):
         super().__init__(d)
