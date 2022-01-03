@@ -19,6 +19,13 @@ class SendMenu(AbstractState):
             self.on_enter()
         if kb['left']:
             self.on_left()
+        if kb['right']:
+            self.on_right()
+        if kb['up']:
+            self.on_up()
+        if kb['down']:
+            self.on_down()
+
     def print_input_buffer(self):
         # sets the row to print on
         row = 0
