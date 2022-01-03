@@ -20,11 +20,8 @@ class FakeLCD(object):
     def print(self, st: str):
         st = st.replace("\n", "")
         st = st.replace("\r", "")
-        if self.cursor_pos[1] < self.width - 1:
-            self.window.addstr(self.cursor_pos[1], self.cursor_pos[0], st)
-        else:
-            print("string too long")
-
+        # if self.cursor_pos[1] < self.width:
+        self.window.addstr(self.cursor_pos[1], self.cursor_pos[0], st)
         self.window.refresh()
 
     def clear(self):
@@ -43,7 +40,10 @@ class FakeLCD(object):
         return current_pos
 
     def draw_cursor(self):
-        self.print(chr(9608))
+        try:
+            self.print(chr(9608))
+        except:
+            pass
 
     # def get_char(self, y, x):
     #     print(chr(self.window.inch(y,x)))

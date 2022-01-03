@@ -10,34 +10,7 @@ class AbstractState(ABC):
         self.nextState = None
 
     def print_error(self, error_message: str):
-        """
-        put an error message on the menu bar
-        :param error_message: the error message to use
-        :return: None
-        """
-        # raises an error when the length of the error message is more than 10
-        if len(error_message) > 10:
-            raise "Error message too long"
-        # sets the row to print
-        row = 3
-        # sets the column to print
-        col = 10
-        # loops through the characters of the string
-        for char in error_message:
-            # sets the cursor where to print
-            self.device.__lcd.set_cursor_pos(row, col)
-            # prints the character
-            self.device.__lcd.print(char)
-            # increments the col until it gets to the second to last cell
-            if col < 18:
-                col += 1
-            else:
-                # self explanatory
-                raise "String cannot print to bottom right cell of LCD. " \
-                      "Crashes for some reason and i am too dumb to figure " \
-                      "out why so I just don't print that far."
-        # sets the cursor back to the users cursor position
-        self.device.__lcd.set_cursor_pos(self.device.cursor_row, self.device.cursor_col)
+        pass
 
     @abstractmethod
     def use_keyboard_input(self, kb: dict):
@@ -62,7 +35,7 @@ class AbstractState(ABC):
     def on_down(self):
         func = inspect.currentframe().f_back.f_code
         self.device.toggle_lcd_event_flag()
-        if self.device.cursor_row < self.device.__lcd.height - 1:
+        if self.device.cursor_row < self.device.lcd_height - 1:
             self.device.next_cursor_row = self.device.cursor_row + 1
         logging.debug("down pressed, cursor position ({},{})".format(self.device.cursor_row, self.device.cursor_col))
 
@@ -78,7 +51,7 @@ class AbstractState(ABC):
     def on_right(self):
         func = inspect.currentframe().f_back.f_code
         self.device.toggle_lcd_event_flag()
-        if self.device.cursor_col < self.device.__lcd.width - 1:
+        if self.device.cursor_col < self.device.lcd_width - 1:
             # increments the column
             self.device.next_cursor_col = self.device.cursor_col + 1
         logging.debug("right pressed, cursor position ({},{})".format(self.device.cursor_row, self.device.cursor_col))

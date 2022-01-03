@@ -41,10 +41,11 @@ class MainMenu(AbstractState):
     def screen(self):
         func = inspect.currentframe().f_back.f_code
         logging.debug("changing device.next_screen")
-        menu = ("* Send", "* Messages", "* Settings")
+        menu = ("* Send", "* Messages", "* Settings"," ")
         self.device.next_screen = ""
         for item in menu:
             self.device.next_screen += "{:<20}".format(item)
+        logging.debug("Length of next_screen is {}".format(len(self.device.next_screen)))
 
     def on_enter(self):
         func = inspect.currentframe().f_back.f_code

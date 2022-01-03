@@ -20,6 +20,8 @@ class Device(object):
         func = inspect.currentframe().f_back.f_code
         logging.debug("created")
         self.__lcd = lcd_to_use
+        self.lcd_height = lcd_to_use.height
+        self.lcd_width = lcd_to_use.width
         self.lora = lora_to_use
         self.messages = Messages()
         self.current_screen = None
@@ -99,6 +101,9 @@ class Device(object):
     def print_screen(self):
         func = inspect.currentframe().f_back.f_code
         logging.debug("print_sceen was called")
+        lcd_redrawn = False
+        if len(self.next_screen) == 80:
+            self.next_screen = self.next_screen[:79]
         if self.next_screen != self.current_screen:
             logging.debug("something actually on the screen changed")
             x = 0
@@ -117,16 +122,17 @@ class Device(object):
         if self.next_cursor_row != self.cursor_row or self.next_cursor_col != self.cursor_col:
             logging.debug("the cursor changed")
             self.__lcd.clear()
-            x = 0
-            y = 0
-            i = 0
-            for c in self.current_screen:
-                self.__lcd.set_cursor_pos(y, x)
-                self.__lcd.print(str(c))
-                i += 1
-                y = i / self.__lcd.width
-                x = i % self.__lcd.width
-            self.current_screen = self.next_screen
+            if not lcd_redrawn:
+                logging.debug("we had to redraw")
+                x = 0
+                y = 0
+                i = 0
+                for c in self.current_screen:
+                    self.__lcd.set_cursor_pos(y, x)
+                    self.__lcd.print(str(c))
+                    i += 1
+                    y = i / self.__lcd.width
+                    x = i % self.__lcd.width
             self.cursor_row = self.next_cursor_row
             self.cursor_col = self.next_cursor_col
             logging.debug("changed cursor position and redrew the screen")
