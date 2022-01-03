@@ -105,12 +105,15 @@ class Device(object):
             y = 0
             i = 0
             for c in self.next_screen:
+                logging.debug("Printed {}".format(c))
                 self.__lcd.set_cursor_pos(y, x)
                 self.__lcd.print(str(c))
                 i += 1
                 y = i / self.__lcd.width
                 x = i % self.__lcd.width
             self.current_screen = self.next_screen
+            lcd_redrawn = True
+            logging.debug("Got past printing")
         if self.next_cursor_row != self.cursor_row or self.next_cursor_col != self.cursor_col:
             logging.debug("the cursor changed")
             self.__lcd.clear()

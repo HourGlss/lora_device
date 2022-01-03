@@ -1,5 +1,6 @@
 from state.state import AbstractState
 from state.compose_menu import ComposeMenu
+#from state.main_menu import MainMenu
 import logging
 import inspect
 
@@ -89,11 +90,18 @@ class SendMenu(AbstractState):
             # checks if the input buffer is empty and if so passes
             if self.device.input_buffer != "":
                 # transitions to the compose_menu state
-                self.nextState = ComposeMenu
+                self.nextState = ComposeMenu(self.device)
                 # sets the data_to_send address
-                self.data_to_send["address"] = int(self.input_buffer)
+                self.device.data_to_send["address"] = int(self.device.input_buffer)
                 # clears the input buffer
                 self.input_buffer = ""
+        if self.device.cursor_row == 3:
+            # transitions to the main_menu state
+            #self.nextState = MainMenu(self.device)
+            # sets the data_to_send address
+            self.device.data_to_send["address"] = int(self.input_buffer)
+            # clears the input buffer
+            self.device.input_buffer = ""
 
 
     def on_up(self):
