@@ -3,9 +3,6 @@ from state.send_menu import SendMenu
 from state.received_menu import ReceivedMenu
 from state.settings_menu import SettingsMenu
 
-
-
-
 class MainMenu(AbstractState):
 
     def __init__(self, d):
