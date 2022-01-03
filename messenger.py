@@ -729,57 +729,32 @@ class Messenger(object):
         :param st: string to write to the input buffer
         :return:
         """
-        # checks the current state
         if self.state == "send_menu":
-            # verifies the input is valid and if not gives an error for the user to view
             if self.__is_address_field_valid(st, 65535, 0):
-                # clears the error message if input is valid
                 self.error_message = None
-                # if the users cursor is beyond the end of the text string it will set the
-                # cursor to the end of the string
                 if self.col > self.text_col and self.row > self.text_row:
-                    # sets the users cursor column to the end of the input buffer text
                     self.col = self.text_col
-                    # sets the users cursor row to the end of the input buffer text
                     self.row = self.text_row
-                # sets the cursor to the current row and col
                 self.lcd.set_cursor_pos(self.row, self.col)
-                # locates the beginning of the input buffer string
                 string_num = self.col + (self.row * self.lcd.width) - 3
-                # only allows a string of 5 characters
                 if len(self.input_buffer) < 5:
-                    # adds a character at the position of the cursor
                     self.input_buffer = self.input_buffer[:string_num] + st + self.input_buffer[string_num:]
-                # checks to make sure sure cursor is not on last column of the row
                 if self.col < self.lcd.width - 1:
-                    # increments the column
                     self.col += 1
-                    # sets the cursor to the current row and col
                     self.lcd.set_cursor_pos(self.row, self.col)
-                # Does not allow writing to the input buffer past the 3rd line
                 elif self.row == self.lcd.height - 3 and self.col == self.lcd.width - 1:
                     pass
                 else:
-                    # increments the row
                     self.row += 1
-                    # sets the col back to zero to wrap the text
                     self.col = 0
-            # sets the error
             else:
                 self.error_message = "0-65535"
-            # checks to make sure the number entered is within the range 0-65535
             if self.__is_address_field_valid(self.input_buffer, 65535, 0):
-                # clears the error_message
                 self.error_message = None
             else:
-                # sets the the error_message
                 self.error_message = "0-65535"
-            # sets the cursor back to the users cursor position
             self.lcd.set_cursor_pos(self.row, self.col)
-        # checks the current state
         if self.state == "compose_message":
-            # if the users cursor is beyond the end of the text string it will set the
-            # cursor to the end of the string
             if self.col > self.text_col and self.row > self.text_row:
                 # sets the users cursor column to the end of the input buffer text
                 self.col = self.text_col

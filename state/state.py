@@ -1,23 +1,13 @@
 from abc import ABC, abstractmethod
-
-
+import inspect
+import logging
 class AbstractState(ABC):
 
     def __init__(self, d):
+        func = inspect.currentframe().f_back.f_code
+        logging.debug("created")
         self.device = d
         self.nextState = None
-
-    def print_menu(self, strings: tuple):
-        # strings = ("* Send", "* Messages", "* Settings")
-        row = 0
-        # loops through the strings and prints each one a row
-        for item in strings:
-            # sets the cursor where to print
-            self.device.lcd.set_cursor_pos(row, 0)
-            # prints the string
-            self.device.lcd.print(item)
-            # increments to the next row
-            row += 1
 
     def print_error(self, error_message: str):
         """
@@ -58,7 +48,7 @@ class AbstractState(ABC):
         pass
 
     @abstractmethod
-    def update_screen(self):
+    def screen(self):
         pass
 
     def on_up(self):
@@ -77,13 +67,18 @@ class AbstractState(ABC):
         logging.debug("down pressed, cursor position ({},{})".format(self.device.cursor_row, self.device.cursor_col))
 
     def on_left(self):
-        if self.device.col > 0:
+        func = inspect.currentframe().f_back.f_code
+        logging.debug("left pressed")
+        self.device.toggle_lcd_event_flag()
+        if self.device.cursor_col > 0:
             # decrements the column
             self.device.next_cursor_col = self.device.cursor_col - 1
         logging.debug("left pressed, cursor position ({},{})".format(self.device.cursor_row, self.device.cursor_col))
 
     def on_right(self):
-        if self.device.col < self.device.lcd.width - 1:
+        func = inspect.currentframe().f_back.f_code
+        self.device.toggle_lcd_event_flag()
+        if self.device.cursor_col < self.device.__lcd.width - 1:
             # increments the column
             self.device.next_cursor_col = self.device.cursor_col + 1
         logging.debug("right pressed, cursor position ({},{})".format(self.device.cursor_row, self.device.cursor_col))

@@ -1,12 +1,20 @@
 from state.state import AbstractState
 from state.compose_menu import ComposeMenu
+import logging
+import inspect
 
 class SendMenu(AbstractState):
 
 
     def __init__(self, d):
+        func = inspect.currentframe().f_back.f_code
         super().__init__(d)
 
+        self.device.next_cursor_row = 0
+        self.device.next_cursor_col = 3
+        self.device.function_toggle = False
+        self.device.toggle_lcd_event_flag()
+        logging.debug("creating SendMenu")
 
     def get_next_state(self):
         if self.nextState is None:
@@ -15,16 +23,27 @@ class SendMenu(AbstractState):
             return self.nextState
 
     def use_keyboard_input(self, kb):
-        if kb['enter']:
+        if kb['right shift']:
+            self.device.function_toggle = not self.device.function_toggle
+            return
+        if self.device.function_toggle:
+            if kb['s']:
+                self.on_down()
+                return
+            if kb['w']:
+                self.on_up()
+                return
+        elif kb['backspace']:
+            self.delete()
+            return
+        elif kb['enter']:
             self.on_enter()
-        if kb['left']:
-            self.on_left()
-        if kb['right']:
-            self.on_right()
-        if kb['up']:
-            self.on_up()
-        if kb['down']:
-            self.on_down()
+            return
+        else:
+            for k in kb.keys():
+                if kb[k]:
+                    self.write_char(k)
+                    break
 
     def print_input_buffer(self):
         # sets the row to print on
@@ -76,8 +95,35 @@ class SendMenu(AbstractState):
                 # clears the input buffer
                 self.input_buffer = ""
 
+
+    def on_up(self):
+        func = inspect.currentframe().f_back.f_code
+        self.device.toggle_lcd_event_flag()
+        if self.device.cursor_row > 0:
+            self.device.next_cursor_row = self.device.cursor_row - 1
+            if self.device.cursor_row == 3:
+                self.device.next_cursor_row -= 1
+        if self.device.next_cursor_row == 0:
+            self.device.next_cursor_col = 3
+        else:
+            self.device.next_cursor_col = 0
+        logging.debug("up pressed, cursor position ({},{})".format(self.device.cursor_row, self.device.cursor_col))
+
+
+    def on_down(self):
+        func = inspect.currentframe().f_back.f_code
+        self.device.toggle_lcd_event_flag()
+        if self.device.cursor_row < self.device.__lcd.height - 1:
+            self.device.next_cursor_row = self.device.cursor_row + 1
+            if self.device.cursor_row == 2:
+                self.device.next_cursor_row += 1
+
+        logging.debug("down pressed, cursor position ({},{})".format(self.device.cursor_row, self.device.cursor_col))
+
     def write_char(self, c):
-        pass
+        if self.device.cursor_row == 0:
+            self.input_buffer += c
+
 
     def delete(self):
         pass

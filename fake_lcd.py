@@ -1,13 +1,12 @@
 import curses
 
 
-class Fake_lcd(object):
+class FakeLCD(object):
     screen_buffer = None
     width = None
     height = None
     cursor_pos = None
     cursor_vis = None
-
 
     def __init__(self, width=20, height=4):
         self.width = width
@@ -18,10 +17,10 @@ class Fake_lcd(object):
         self.cursor_vis = curses.curs_set(1)
         curses.noecho()
 
-    def print(self, st):
-        st = st.replace("\n","")
-        st = st.replace("\r","")
-        if self.cursor_pos[1] < self.width-1:
+    def print(self, st: str):
+        st = st.replace("\n", "")
+        st = st.replace("\r", "")
+        if self.cursor_pos[1] < self.width - 1:
             self.window.addstr(self.cursor_pos[1], self.cursor_pos[0], st)
         else:
             print("string too long")
@@ -34,10 +33,10 @@ class Fake_lcd(object):
         self.screen.refresh()
 
     def set_cursor_pos(self, row, col):
-        self.cursor_pos = (col, row)
+        self.cursor_pos = (int(col), int(row))
 
     def delete(self, y, x):
-        self.window.delch(x,y)
+        self.window.delch(x, y)
 
     def current_cursor_pos(self):
         current_pos = self.cursor_pos
