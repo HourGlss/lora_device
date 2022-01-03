@@ -32,12 +32,14 @@ class MainMenu(AbstractState):
     def print_input_buffer(self):
         pass
 
-    def update_screen(self):
-        self.print_menu(("* Send", "* Messages", "* Settings"))
-        # if there is an error it will display it on the bottom line
-        if self.device.error_message is not None:
-            # prints the error message
-            self.print_error(self.device.error_message)
+
+    def screen(self):
+        func = inspect.currentframe().f_back.f_code
+        logging.debug("changing device.next_screen")
+        menu = ("* Send", "* Messages", "* Settings")
+        self.device.next_screen = ""
+        for item in menu:
+            self.device.next_screen += "{:<20}".format(item)
 
     def on_enter(self):
         # checks if the the cursor is at 0,0

@@ -35,9 +35,9 @@ class AbstractState(ABC):
         # loops through the characters of the string
         for char in error_message:
             # sets the cursor where to print
-            self.device.lcd.set_cursor_pos(row, col)
+            self.device.__lcd.set_cursor_pos(row, col)
             # prints the character
-            self.device.lcd.print(char)
+            self.device.__lcd.print(char)
             # increments the col until it gets to the second to last cell
             if col < 18:
                 col += 1
@@ -47,7 +47,7 @@ class AbstractState(ABC):
                       "Crashes for some reason and i am too dumb to figure " \
                       "out why so I just don't print that far."
         # sets the cursor back to the users cursor position
-        self.device.lcd.set_cursor_pos(self.device.row, self.device.col)
+        self.device.__lcd.set_cursor_pos(self.device.cursor_row, self.device.cursor_col)
 
     @abstractmethod
     def use_keyboard_input(self, kb: dict):
@@ -62,32 +62,31 @@ class AbstractState(ABC):
         pass
 
     def on_up(self):
-        if self.device.row > 0:
-            # increments the row
-            self.device.row -= 1
-            # moves the cursor to the users cursor position
-            self.device.lcd.set_cursor_pos(self.device.row, self.device.col)
+        func = inspect.currentframe().f_back.f_code
+        self.device.toggle_lcd_event_flag()
+        if self.device.cursor_row > 0:
+            self.device.next_cursor_row = self.device.cursor_row - 1
+        logging.debug("up pressed, cursor position ({},{})".format(self.device.cursor_row, self.device.cursor_col))
+
 
     def on_down(self):
-        if self.device.row < self.device.lcd.height - 1:
-            # increments the row
-            self.device.row += 1
-            # moves the cursor to the users cursor position
-            self.device.lcd.set_cursor_pos(self.device.row, self.device.col)
+        func = inspect.currentframe().f_back.f_code
+        self.device.toggle_lcd_event_flag()
+        if self.device.cursor_row < self.device.__lcd.height - 1:
+            self.device.next_cursor_row = self.device.cursor_row + 1
+        logging.debug("down pressed, cursor position ({},{})".format(self.device.cursor_row, self.device.cursor_col))
 
     def on_left(self):
         if self.device.col > 0:
             # decrements the column
-            self.device.col -= 1
-            # moves the cursor to the users cursor position
-            self.device.lcd.set_cursor_pos(self.device.row, self.device.col)
+            self.device.next_cursor_col = self.device.cursor_col - 1
+        logging.debug("left pressed, cursor position ({},{})".format(self.device.cursor_row, self.device.cursor_col))
 
     def on_right(self):
         if self.device.col < self.device.lcd.width - 1:
             # increments the column
-            self.device.col += 1
-            # moves the cursor to the users cursor position
-            self.device.lcd.set_cursor_pos(self.device.row, self.device.col)
+            self.device.next_cursor_col = self.device.cursor_col + 1
+        logging.debug("right pressed, cursor position ({},{})".format(self.device.cursor_row, self.device.cursor_col))
 
     @abstractmethod
     def on_enter(self):
