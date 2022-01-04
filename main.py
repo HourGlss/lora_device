@@ -1,15 +1,21 @@
 from fake_rylr896 import RYLR896
 from fake_lcd import FakeLCD
-from state.main_menu import MainMenu
+from states import MainMenu
 from device import Device
 
 import keyboard
 import logging
 import inspect
 import sys
+import os
 
+log_file = "runlog.log"
+
+file_exists = os.path.exists(log_file)
+if file_exists:
+    os.remove(log_file)
 FORMAT = "[{%(levelname)s} %(filename)s:%(lineno)s 	- %(funcName)20s() ] %(message)s"
-logging.basicConfig(filename='runlog.log', level=logging.DEBUG, format=FORMAT)
+logging.basicConfig(filename=log_file, level=logging.DEBUG, format=FORMAT)
 
 class Driver:
 

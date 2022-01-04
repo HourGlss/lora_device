@@ -40,10 +40,7 @@ class FakeLCD(object):
         return current_pos
 
     def draw_cursor(self):
-        try:
-            self.print(chr(9608))
-        except:
-            pass
+        self.print(chr(9608))
 
     # def get_char(self, y, x):
     #     print(chr(self.window.inch(y,x)))

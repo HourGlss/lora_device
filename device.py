@@ -102,9 +102,11 @@ class Device(object):
 
     def print_screen(self):
         func = inspect.currentframe().f_back.f_code
-        logging.debug("print_sceen was called")
+        logging.debug(" ")
+        logging.debug("device.current_screen {}".format(self.current_screen))
+        logging.debug("device.next_screen {}".format(self.next_screen))
         lcd_redrawn = False
-        if len(self.next_screen) == 80:
+        if len(self.next_screen) >= 80:
             self.next_screen = self.next_screen[:79]
         if self.next_screen != self.current_screen:
             logging.debug("something actually on the screen changed")
@@ -113,6 +115,7 @@ class Device(object):
             i = 0
             for c in self.next_screen:
                 self.__lcd.set_cursor_pos(y, x)
+                # logging.debug("{}".format(str(c)))
                 self.__lcd.print(str(c))
                 i += 1
                 y = i / self.__lcd.width
@@ -122,7 +125,6 @@ class Device(object):
             logging.debug("Got past printing")
         if self.next_cursor_row != self.cursor_row or self.next_cursor_col != self.cursor_col:
             logging.debug("the cursor changed")
-            self.__lcd.clear()
             if not lcd_redrawn:
                 x = 0
                 y = 0
@@ -141,6 +143,7 @@ class Device(object):
         self.__lcd.draw_cursor()
         logging.debug("finished drawing the cursor")
         self.toggle_lcd_event_flag()
+        logging.debug(" ")
 
     def get_message(self):
         data_in = self.lora.read_from_device()
