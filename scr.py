@@ -1,5 +1,5 @@
 
 text = "abcdefg"
 print(len(text))
-text = text[:6]
+text = text[0:3]
 print(text)

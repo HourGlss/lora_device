@@ -5,7 +5,11 @@ from state.settings_menu import SettingsMenu
 import inspect
 import logging
 
+
 class MainMenu(AbstractState):
+
+    def initial(self):
+        pass
 
     def __init__(self, d):
         super().__init__(d)
@@ -15,11 +19,7 @@ class MainMenu(AbstractState):
         self.lowest_row = 2
         self.device.toggle_lcd_event_flag()
 
-    def get_next_state(self):
-        if self.nextState is None:
-            return self
-        else:
-            return self.nextState
+
 
     def use_keyboard_input(self, kb):
         func = inspect.currentframe().f_back.f_code
@@ -33,15 +33,10 @@ class MainMenu(AbstractState):
             self.on_enter()
             return
 
-
-    def print_input_buffer(self):
-        pass
-
-
     def screen(self):
         func = inspect.currentframe().f_back.f_code
         logging.debug("changing device.next_screen")
-        menu = ("* Send", "* Messages", "* Settings"," ")
+        menu = ("* Send", "* Messages", "* Settings", " ")
         self.device.next_screen = ""
         for item in menu:
             self.device.next_screen += "{:<20}".format(item)
@@ -75,6 +70,8 @@ class MainMenu(AbstractState):
             # increments the row
             self.device.next_cursor_row = self.device.cursor_row + 1
             self.device.toggle_lcd_event_flag()
-            logging.debug("down pressed, cursor position ({},{})".format(self.device.cursor_row, self.device.cursor_col))
+            logging.debug(
+                "down pressed, cursor position ({},{})".format(self.device.cursor_row, self.device.cursor_col))
         else:
-            logging.debug("down pressed but NOT MOVING, cursor position ({},{})".format(self.device.cursor_row, self.device.cursor_col))
+            logging.debug("down pressed but NOT MOVING, cursor position ({},{})".format(self.device.cursor_row,
+                                                                                        self.device.cursor_col))

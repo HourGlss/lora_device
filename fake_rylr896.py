@@ -51,7 +51,7 @@ class RYLR896:
         self.set_device_timeout()
         if self.test_device():
             self.factory_reset()
-            print("{} is factory reset and ready to use".format(self.name))
+            # print("{} is factory reset and ready to use".format(self.name))
             self.address = 0
             self.band = 915000000
             self.cpin = "No Password!"
@@ -65,7 +65,7 @@ class RYLR896:
             self.programmed_preamble = 4
             self.check = True
         else:
-            print("Failed to establish communication with {}".format(self.name))
+            # print("Failed to establish communication with {}".format(self.name))
             self.check = False
 
     def set_device_timeout(self, timeout_to_use: float = .5):

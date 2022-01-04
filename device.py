@@ -35,10 +35,12 @@ class Device(object):
         self.cursor_col = 0
         self.next_cursor_row = 0
         self.next_cursor_col = 0
+        self.data_to_send = dict()
 
         self.lcd_event_change_detected = False
 
         self.input_buffer = ""
+        self.next_input_buffer = ""
 
     def get_keyboard_input(self):
         func = inspect.currentframe().f_back.f_code
@@ -110,7 +112,6 @@ class Device(object):
             y = 0
             i = 0
             for c in self.next_screen:
-                logging.debug("Printed {}".format(c))
                 self.__lcd.set_cursor_pos(y, x)
                 self.__lcd.print(str(c))
                 i += 1
@@ -123,7 +124,6 @@ class Device(object):
             logging.debug("the cursor changed")
             self.__lcd.clear()
             if not lcd_redrawn:
-                logging.debug("we had to redraw")
                 x = 0
                 y = 0
                 i = 0

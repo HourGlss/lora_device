@@ -9,15 +9,12 @@ class AbstractState(ABC):
         self.device = d
         self.nextState = None
 
-    def print_error(self, error_message: str):
+    @abstractmethod
+    def initial(self):
         pass
 
     @abstractmethod
     def use_keyboard_input(self, kb: dict):
-        pass
-
-    @abstractmethod
-    def print_input_buffer(self):
         pass
 
     @abstractmethod
@@ -37,7 +34,7 @@ class AbstractState(ABC):
         self.device.toggle_lcd_event_flag()
         if self.device.cursor_row < self.device.lcd_height - 1:
             self.device.next_cursor_row = self.device.cursor_row + 1
-        logging.debug("down pressed, cursor position ({},{})".format(self.device.cursor_row, self.device.cursor_col))
+        logging.info("down pressed, cursor position ({},{})".format(self.device.cursor_row, self.device.cursor_col))
 
     def on_left(self):
         func = inspect.currentframe().f_back.f_code
@@ -68,6 +65,8 @@ class AbstractState(ABC):
     def delete(self):
         pass
 
-    @abstractmethod
     def get_next_state(self):
-        pass
+        if self.nextState is None:
+            return self
+        else:
+            return self.nextState
