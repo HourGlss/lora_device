@@ -240,15 +240,15 @@ class SendMenu(AbstractState):
             if kb['w']:
                 self.on_up()
                 return
-        elif kb['backspace']:
+        if kb['backspace']:
             self.delete()
             return
-        else:
-            if self.device.cursor_row == 0:
-                for k in kb.keys():
-                    if kb[k]:
-                        self.write_char(k)
-                        break
+
+        if self.device.cursor_row == 0:
+            for k in kb.keys():
+                if kb[k]:
+                    self.write_char(k)
+                    break
 
     def on_enter(self):
         func = inspect.currentframe().f_back.f_code
