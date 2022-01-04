@@ -76,6 +76,119 @@ class AbstractState(ABC):
 class ComposeMenu(AbstractState):
 
     def __init__(self, d):
+        func = inspect.currentframe().f_back.f_code
+        logging.debug("ComposeMenu initialized")
+        super().__init__(d)
+        self.device.next_cursor_row = 0
+        self.device.next_cursor_col = 5
+        self.device.function_toggle = False
+        self.device.toggle_lcd_event_flag()
+        logging.debug("creating ComposeMenu")
+
+    def initial(self):
+        func = inspect.currentframe().f_back.f_code
+        logging.info("intial setup for ComposeMenu")
+        self.device.next_cursor_row = 0
+        self.device.next_cursor_col = 5
+        self.device.toggle_lcd_event_flag()
+        self.device.input_buffer = ""
+        self.device.next_input_buffer = ""
+        menu = ("Send:", "", "", "M B")
+        self.device.next_screen = ""
+        for item in menu:
+            self.device.next_screen += "{:<20}".format(item)
+
+    def screen(self):
+        func = inspect.currentframe().f_back.f_code
+        logging.debug("changing device.next_screen")
+        logging.debug("device.current_screen {}".format(self.device.current_screen))
+        logging.debug("device.next_screen {}".format(self.device.next_screen))
+        if self.device.input_buffer != self.device.next_input_buffer:
+            logging.info("input buffer is not empty")
+            self.device.next_screen = "{}{:<5}{}".format(self.device.current_screen[0:5], self.device.next_input_buffer,
+                                                         self.device.current_screen[59:])
+            print(self.device.next_screen)
+            logging.info("setting next_screen to {}".format(self.device.next_screen))
+            self.device.input_buffer = self.device.next_input_buffer
+
+            logging.debug("Length of next_screen is {}".format(len(self.device.next_screen)))
+        else:
+            pass
+
+
+    def use_keyboard_input(self, kb):
+        if kb['enter']:
+            self.on_enter()
+            return
+        if kb['right shift']:
+            self.device.function_toggle = not self.device.function_toggle
+            return
+        if self.device.function_toggle:
+            if kb['s']:
+                self.on_down()
+                return
+            if kb['w']:
+                self.on_up()
+                return
+            if kb['a']:
+                self.on_left()
+                return
+            if kb['d']:
+                self.on_right()
+                return
+        if kb['backspace']:
+            self.delete()
+            return
+
+        if self.device.cursor_row == 0:
+            for k in kb.keys():
+                if kb[k]:
+                    self.write_char(k)
+                    break
+
+    def on_enter(self):
+        # checks if the the cursor is at 3,0
+        if self.device.cursor_row == 3 and self.device.cursor_col == 0:
+            # transitions to the main_menu state
+            self.nextState = MainMenu(self.device)
+
+        # checks if the the cursor is at 3,2
+        elif self.device.cursor_row == 3 and self.device.cursor_col == 2:
+            # transitions to the send_menu state
+            self.nextState = SendMenu(self.device)
+
+        # checks if the the cursor is at 3,4
+        elif self.device.cursor_row == 0 and self.device.cursor_col <= 5:
+            # transitions to the sending_message state
+            if self.device.input_buffer is not None:
+                self.nextState = SendingMessage(self.device)
+                self.device.data_to_send["data"] = str(self.device.input_buffer)
+
+    def write_char(self, c):
+        pass
+        func = inspect.currentframe().f_back.f_code
+
+        logging.info("attemping to add {}".format(c))
+        # adds a character at the position of the cursor
+        #self.device.input_buffer = self.device.input_buffer[0] + c + self.device.input_buffer[string_num:]
+        # checks to make sure sure cursor is not on last column of the row
+
+    def delete(self):
+        if self.device.cursor_row == 0:
+            if len(self.device.next_input_buffer) > 0:
+                self.device.next_input_buffer = self.device.next_input_buffer[:-1]
+                self.device.toggle_lcd_event_flag()
+                self.device.next_cursor_col = self.device.cursor_col - 1
+
+    def get_next_state(self):
+        if self.nextState is None:
+            return self
+        else:
+            return self.nextState
+
+class SendingMessage(AbstractState):
+
+    def __init__(self, d):
         super().__init__(d)
 
     def get_next_state(self):
@@ -108,7 +221,6 @@ class ComposeMenu(AbstractState):
 
     def delete(self):
         pass
-
 
 class SettingsMenu(AbstractState):
 
@@ -197,13 +309,12 @@ class SendMenu(AbstractState):
         self.device.toggle_lcd_event_flag()
         logging.debug("creating SendMenu")
 
+
     def initial(self):
         func = inspect.currentframe().f_back.f_code
         logging.info(" ")
         self.device.next_cursor_row = 0
         self.device.next_cursor_col = 3
-        self.device.cursor_row = 0
-        self.device.cursor_col = 3
         self.device.toggle_lcd_event_flag()
         self.device.input_buffer = ""
         self.device.next_input_buffer = ""
