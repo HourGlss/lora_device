@@ -170,34 +170,8 @@ class ComposeMenu(AbstractState):
         text_col = int(len(self.device.input_buffer) + self.device.initial_cursor_col)
         text_row = int((len(self.device.input_buffer) + self.device.initial_cursor_row) / 20)
 
-        if c == 'space':
-            c = ' '
-        if self.device.cursor_col > text_col and self.device.cursor_row > text_row:
-            # sets the users cursor column to the end of the input buffer text
-            self.device.next_cursor_col = text_col
-            # sets the users cursor row to the end of the input buffer text
-            self.device.next_cursor_row = text_row
-            logging.debug("moved cursor to {}".format(text_col))
-            logging.debug("moved cursor to{}".format(text_row))
-            self.device.toggle_lcd_event_flag()
-
-        string_num = self.device.cursor_col + (self.device.cursor_row * self.device.lcd_width) - self.device.initial_cursor_col
-        logging.debug(string_num)
-        # adds a character at the position of the cursor
-        self.device.next_input_buffer = self.device.input_buffer[:string_num] + c + self.device.input_buffer[string_num:]
-        if self.device.next_cursor_col < self.device.lcd_width-1:
-            self.device.next_cursor_col = self.device.cursor_col + 1
-            self.device.toggle_lcd_event_flag()
-        else:
-            logging.debug("going to next row")
-            self.device.next_cursor_row = self.device.cursor_row + 1
-            self.device.next_cursor_col = 0
-            logging.debug("cursor row is {}, cursor col is {}".format(self.device.next_cursor_row, self.device.next_cursor_col))
-            self.device.toggle_lcd_event_flag()
-
-
-
-
+        # if c == 'space':
+        #     c = ' '
 
     def delete(self):
         string_num = self.device.cursor_col + (self.device.cursor_row * self.device.lcd_width) - self.device.initial_cursor_col
