@@ -1,5 +1,3 @@
+result = 80/20
 
-text = "abcdefg"
-print(len(text))
-text = text[0:3]
-print(text)
+print(int(result))

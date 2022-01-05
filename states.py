@@ -74,6 +74,9 @@ class AbstractState(ABC):
 
 
 class ComposeMenu(AbstractState):
+    """
+    TODO
+    """
 
     def __init__(self, d):
         func = inspect.currentframe().f_back.f_code
@@ -88,8 +91,10 @@ class ComposeMenu(AbstractState):
     def initial(self):
         func = inspect.currentframe().f_back.f_code
         logging.info("intial setup for ComposeMenu")
-        self.device.next_cursor_row = 0
-        self.device.next_cursor_col = 5
+        self.device.initial_cursor_row = 0
+        self.device.initial_cursor_col = 5
+        self.device.next_cursor_row = self.device.initial_cursor_row
+        self.device.next_cursor_col = self.device.initial_cursor_col
         self.device.toggle_lcd_event_flag()
         self.device.input_buffer = ""
         self.device.next_input_buffer = ""
@@ -100,15 +105,10 @@ class ComposeMenu(AbstractState):
 
     def screen(self):
         func = inspect.currentframe().f_back.f_code
-        logging.debug("changing device.next_screen")
-        logging.debug("device.current_screen {}".format(self.device.current_screen))
-        logging.debug("device.next_screen {}".format(self.device.next_screen))
         if self.device.input_buffer != self.device.next_input_buffer:
             logging.info("input buffer is not empty")
-            self.device.next_screen = "{}{:<5}{}".format(self.device.current_screen[0:5], self.device.next_input_buffer,
+            self.device.next_screen = "{}{}{}".format(self.device.current_screen[0:5], self.device.next_input_buffer,
                                                          self.device.current_screen[59:])
-            print(self.device.next_screen)
-            logging.info("setting next_screen to {}".format(self.device.next_screen))
             self.device.input_buffer = self.device.next_input_buffer
 
             logging.debug("Length of next_screen is {}".format(len(self.device.next_screen)))
@@ -140,11 +140,10 @@ class ComposeMenu(AbstractState):
             self.delete()
             return
 
-        if self.device.cursor_row == 0:
-            for k in kb.keys():
-                if kb[k]:
-                    self.write_char(k)
-                    break
+        for k in kb.keys():
+            if kb[k]:
+                self.write_char(k)
+                break
 
     def on_enter(self):
         # checks if the the cursor is at 3,0
@@ -165,20 +164,56 @@ class ComposeMenu(AbstractState):
                 self.device.data_to_send["data"] = str(self.device.input_buffer)
 
     def write_char(self, c):
-        pass
         func = inspect.currentframe().f_back.f_code
+        logging.info("attempting to add {}".format(c))
 
-        logging.info("attemping to add {}".format(c))
+        text_col = int(len(self.device.input_buffer) + self.device.initial_cursor_col)
+        text_row = int((len(self.device.input_buffer) + self.device.initial_cursor_row) / 20)
+
+        if c == 'space':
+            c = ' '
+        if self.device.cursor_col > text_col and self.device.cursor_row > text_row:
+            # sets the users cursor column to the end of the input buffer text
+            self.device.next_cursor_col = text_col
+            # sets the users cursor row to the end of the input buffer text
+            self.device.next_cursor_row = text_row
+            logging.debug("moved cursor to {}".format(text_col))
+            logging.debug("moved cursor to{}".format(text_row))
+            self.device.toggle_lcd_event_flag()
+
+        string_num = self.device.cursor_col + (self.device.cursor_row * self.device.lcd_width) - self.device.initial_cursor_col
+        logging.debug(string_num)
         # adds a character at the position of the cursor
-        #self.device.input_buffer = self.device.input_buffer[0] + c + self.device.input_buffer[string_num:]
-        # checks to make sure sure cursor is not on last column of the row
+        self.device.next_input_buffer = self.device.input_buffer[:string_num] + c + self.device.input_buffer[string_num:]
+        if self.device.next_cursor_col < self.device.lcd_width-1:
+            self.device.next_cursor_col = self.device.cursor_col + 1
+            self.device.toggle_lcd_event_flag()
+        else:
+            logging.debug("going to next row")
+            self.device.next_cursor_row = self.device.cursor_row + 1
+            self.device.next_cursor_col = 0
+            logging.debug("cursor row is {}, cursor col is {}".format(self.device.next_cursor_row, self.device.next_cursor_col))
+            self.device.toggle_lcd_event_flag()
+
+
+
+
 
     def delete(self):
-        if self.device.cursor_row == 0:
-            if len(self.device.next_input_buffer) > 0:
-                self.device.next_input_buffer = self.device.next_input_buffer[:-1]
+        string_num = self.device.cursor_col + (self.device.cursor_row * self.device.lcd_width) - self.device.initial_cursor_col
+        if len(self.device.next_input_buffer) > 0:
+
+            if self.device.cursor_col > 0:
+                self.device.next_input_buffer = self.device.next_input_buffer[:string_num - 1] + self.device.next_input_buffer[string_num:]
                 self.device.toggle_lcd_event_flag()
                 self.device.next_cursor_col = self.device.cursor_col - 1
+            elif self.device.cursor_row == 0 and self.device.cursor_col == 0:
+                pass
+            else:
+                self.device.next_cursor_col = self.device.lcd_width - 1
+                self.device.next_cursor_row = self.device.cursor_row - 1
+                self.device.toggle_lcd_event_flag()
+
 
     def get_next_state(self):
         if self.nextState is None:
@@ -313,8 +348,10 @@ class SendMenu(AbstractState):
     def initial(self):
         func = inspect.currentframe().f_back.f_code
         logging.info(" ")
-        self.device.next_cursor_row = 0
-        self.device.next_cursor_col = 3
+        self.device.initial_cursor_row = 0
+        self.device.initial_cursor_col = 3
+        self.device.next_cursor_row = self.device.initial_cursor_row
+        self.device.next_cursor_col = self.device.initial_cursor_col
         self.device.toggle_lcd_event_flag()
         self.device.input_buffer = ""
         self.device.next_input_buffer = ""
