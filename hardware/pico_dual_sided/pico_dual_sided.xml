@@ -1,0 +1,1568 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="D">
+  <design>
+    <source>C:\Users\azbai\Documents\pico\pico_updated\pico_dual_sided\pico_dual_sided.sch</source>
+    <date>1/1/2022 12:09:19 AM</date>
+    <tool>Eeschema (5.1.12)-1</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title/>
+        <company/>
+        <rev/>
+        <date/>
+        <source>pico_dual_sided.sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="J1">
+      <value>Conn_01x04</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Connector_Generic" part="Conn_01x04" description="Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61CFB489</tstamp>
+    </comp>
+    <comp ref="SW37">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D3B7CB</tstamp>
+    </comp>
+    <comp ref="D39">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D3B7D1</tstamp>
+    </comp>
+    <comp ref="SW33">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D3B7D7</tstamp>
+    </comp>
+    <comp ref="D35">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D3B7DD</tstamp>
+    </comp>
+    <comp ref="SW29">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D3B7E6</tstamp>
+    </comp>
+    <comp ref="D31">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D3B7EC</tstamp>
+    </comp>
+    <comp ref="SW25">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D3B7F2</tstamp>
+    </comp>
+    <comp ref="D27">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D3B7F8</tstamp>
+    </comp>
+    <comp ref="SW21">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D3B801</tstamp>
+    </comp>
+    <comp ref="D23">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D3B807</tstamp>
+    </comp>
+    <comp ref="SW17">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D3B80D</tstamp>
+    </comp>
+    <comp ref="D19">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D3B813</tstamp>
+    </comp>
+    <comp ref="SW13">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D3B81C</tstamp>
+    </comp>
+    <comp ref="D15">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D3B822</tstamp>
+    </comp>
+    <comp ref="SW9">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D3B828</tstamp>
+    </comp>
+    <comp ref="D11">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D3B82E</tstamp>
+    </comp>
+    <comp ref="SW5">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D3B837</tstamp>
+    </comp>
+    <comp ref="D7">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D3B83D</tstamp>
+    </comp>
+    <comp ref="SW1">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D3B843</tstamp>
+    </comp>
+    <comp ref="D1">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D3B849</tstamp>
+    </comp>
+    <comp ref="D16">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D56103</tstamp>
+    </comp>
+    <comp ref="SW10">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D56109</tstamp>
+    </comp>
+    <comp ref="D12">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D5610F</tstamp>
+    </comp>
+    <comp ref="SW6">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D56118</tstamp>
+    </comp>
+    <comp ref="D8">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D5611E</tstamp>
+    </comp>
+    <comp ref="SW2">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D56124</tstamp>
+    </comp>
+    <comp ref="D2">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D5612A</tstamp>
+    </comp>
+    <comp ref="SW38">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D560AC</tstamp>
+    </comp>
+    <comp ref="D40">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D560B2</tstamp>
+    </comp>
+    <comp ref="SW14">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D560FD</tstamp>
+    </comp>
+    <comp ref="D20">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D560F4</tstamp>
+    </comp>
+    <comp ref="SW18">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D560EE</tstamp>
+    </comp>
+    <comp ref="D24">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D560E8</tstamp>
+    </comp>
+    <comp ref="SW22">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D560E2</tstamp>
+    </comp>
+    <comp ref="D28">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D560D9</tstamp>
+    </comp>
+    <comp ref="SW26">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D560D3</tstamp>
+    </comp>
+    <comp ref="D32">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D560CD</tstamp>
+    </comp>
+    <comp ref="SW30">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D560C7</tstamp>
+    </comp>
+    <comp ref="D36">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D560BE</tstamp>
+    </comp>
+    <comp ref="SW34">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61D560B8</tstamp>
+    </comp>
+    <comp ref="D18">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DBB13C</tstamp>
+    </comp>
+    <comp ref="SW12">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DBB142</tstamp>
+    </comp>
+    <comp ref="D14">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DBB148</tstamp>
+    </comp>
+    <comp ref="SW8">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DBB151</tstamp>
+    </comp>
+    <comp ref="D10">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DBB157</tstamp>
+    </comp>
+    <comp ref="D4">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DBB163</tstamp>
+    </comp>
+    <comp ref="SW40">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DBB198</tstamp>
+    </comp>
+    <comp ref="D42">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DBB19E</tstamp>
+    </comp>
+    <comp ref="SW16">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DBB1B2</tstamp>
+    </comp>
+    <comp ref="D22">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DBB1BA</tstamp>
+    </comp>
+    <comp ref="SW20">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DBB1C0</tstamp>
+    </comp>
+    <comp ref="D26">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DBB1C6</tstamp>
+    </comp>
+    <comp ref="SW24">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DBB1CC</tstamp>
+    </comp>
+    <comp ref="D30">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DBB1D4</tstamp>
+    </comp>
+    <comp ref="SW28">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DBB1DA</tstamp>
+    </comp>
+    <comp ref="D34">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DBB1E0</tstamp>
+    </comp>
+    <comp ref="SW32">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DBB1E6</tstamp>
+    </comp>
+    <comp ref="D38">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DBB1EE</tstamp>
+    </comp>
+    <comp ref="SW36">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DBB1F4</tstamp>
+    </comp>
+    <comp ref="D17">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DDD4C8</tstamp>
+    </comp>
+    <comp ref="SW11">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DDD4CE</tstamp>
+    </comp>
+    <comp ref="D13">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DDD4D4</tstamp>
+    </comp>
+    <comp ref="SW7">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DDD4DD</tstamp>
+    </comp>
+    <comp ref="D9">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DDD4E3</tstamp>
+    </comp>
+    <comp ref="D3">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DDD4EF</tstamp>
+    </comp>
+    <comp ref="SW39">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DDD50C</tstamp>
+    </comp>
+    <comp ref="D41">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DDD512</tstamp>
+    </comp>
+    <comp ref="SW15">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DDD51F</tstamp>
+    </comp>
+    <comp ref="D21">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DDD527</tstamp>
+    </comp>
+    <comp ref="SW19">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DDD52D</tstamp>
+    </comp>
+    <comp ref="D25">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DDD533</tstamp>
+    </comp>
+    <comp ref="SW23">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DDD539</tstamp>
+    </comp>
+    <comp ref="D29">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DDD541</tstamp>
+    </comp>
+    <comp ref="SW27">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DDD547</tstamp>
+    </comp>
+    <comp ref="D33">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DDD54D</tstamp>
+    </comp>
+    <comp ref="SW31">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DDD553</tstamp>
+    </comp>
+    <comp ref="D37">
+      <value>D</value>
+      <footprint>Diode_THT:D_T-1_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DDD55B</tstamp>
+    </comp>
+    <comp ref="SW35">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DDD561</tstamp>
+    </comp>
+    <comp ref="R1">
+      <value>R</value>
+      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61F496A7</tstamp>
+    </comp>
+    <comp ref="D5">
+      <value>LD271</value>
+      <footprint>LED_THT:LED_D5.0mm_IRGrey</footprint>
+      <datasheet>http://www.alliedelec.com/m/d/40788c34903a719969df15f1fbea1056.pdf</datasheet>
+      <libsource lib="LED" part="LD271" description="940nm IR-LED, 5mm"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61F496AD</tstamp>
+    </comp>
+    <comp ref="R2">
+      <value>R</value>
+      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61F5504A</tstamp>
+    </comp>
+    <comp ref="D6">
+      <value>LD271</value>
+      <footprint>LED_THT:LED_D5.0mm_IRGrey</footprint>
+      <datasheet>http://www.alliedelec.com/m/d/40788c34903a719969df15f1fbea1056.pdf</datasheet>
+      <libsource lib="LED" part="LD271" description="940nm IR-LED, 5mm"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61F55050</tstamp>
+    </comp>
+    <comp ref="SW3">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DDD4E9</tstamp>
+    </comp>
+    <comp ref="SW4">
+      <value>SW_MEC_5E</value>
+      <footprint>Button_Switch_THT:SW_PUSH_6mm_H5mm</footprint>
+      <datasheet>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</datasheet>
+      <libsource lib="Switch" part="SW_MEC_5E" description="MEC 5E single pole normally-open tactile switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61DBB15D</tstamp>
+    </comp>
+    <comp ref="R3">
+      <value>R</value>
+      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61F1EC86</tstamp>
+    </comp>
+    <comp ref="D43">
+      <value>LD271</value>
+      <footprint>LED_THT:LED_D5.0mm_IRGrey</footprint>
+      <datasheet>http://www.alliedelec.com/m/d/40788c34903a719969df15f1fbea1056.pdf</datasheet>
+      <libsource lib="LED" part="LD271" description="940nm IR-LED, 5mm"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61F1EC8C</tstamp>
+    </comp>
+    <comp ref="IC1">
+      <value>REYAX_RYLR896</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Horizontal</footprint>
+      <datasheet>http://reyax.com/products/rylr896/</datasheet>
+      <fields>
+        <field name="Description">RYLR896 transceiver module</field>
+        <field name="Height">25</field>
+        <field name="Manufacturer_Name">Reyax</field>
+        <field name="Manufacturer_Part_Number">REYAX RYLR896</field>
+      </fields>
+      <libsource lib="REYAX_RYLR896" part="REYAX_RYLR896" description="RYLR896 transceiver module"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61CF6118</tstamp>
+    </comp>
+    <comp ref="U1">
+      <value>Pico</value>
+      <footprint>MCU_RaspberryPi_and_Boards:RPi_Pico_SMD_TH</footprint>
+      <libsource lib="MCU_RaspberryPi_and_Boards" part="Pico" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61CF5BC5</tstamp>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Connector_Generic" part="Conn_01x04">
+      <description>Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x04</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="D">
+      <description>Diode</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>TO-???*</fp>
+        <fp>*_Diode_*</fp>
+        <fp>*SingleDiode*</fp>
+        <fp>D_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">D</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="R">
+      <description>Resistor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="LED" part="LD271">
+      <aliases>
+        <alias>SFH4546</alias>
+        <alias>CQY99</alias>
+        <alias>LD274</alias>
+        <alias>SFH4550</alias>
+      </aliases>
+      <description>940nm IR-LED, 5mm</description>
+      <docs>http://www.alliedelec.com/m/d/40788c34903a719969df15f1fbea1056.pdf</docs>
+      <footprints>
+        <fp>LED*5.0mm*IRGrey*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LD271</field>
+        <field name="Footprint">LED_THT:LED_D5.0mm_IRGrey</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="MCU_RaspberryPi_and_Boards" part="Pico">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">Pico</field>
+        <field name="Footprint">RPi_Pico:RPi_Pico_SMD_TH</field>
+      </fields>
+      <pins>
+        <pin num="1" name="GPIO0" type="BiDi"/>
+        <pin num="2" name="GPIO1" type="BiDi"/>
+        <pin num="3" name="GND" type="power_in"/>
+        <pin num="4" name="GPIO2" type="BiDi"/>
+        <pin num="5" name="GPIO3" type="BiDi"/>
+        <pin num="6" name="GPIO4" type="BiDi"/>
+        <pin num="7" name="GPIO5" type="BiDi"/>
+        <pin num="8" name="GND" type="power_in"/>
+        <pin num="9" name="GPIO6" type="BiDi"/>
+        <pin num="10" name="GPIO7" type="BiDi"/>
+        <pin num="11" name="GPIO8" type="BiDi"/>
+        <pin num="12" name="GPIO9" type="BiDi"/>
+        <pin num="13" name="GND" type="power_in"/>
+        <pin num="14" name="GPIO10" type="BiDi"/>
+        <pin num="15" name="GPIO11" type="BiDi"/>
+        <pin num="16" name="GPIO12" type="BiDi"/>
+        <pin num="17" name="GPIO13" type="BiDi"/>
+        <pin num="18" name="GND" type="power_in"/>
+        <pin num="19" name="GPIO14" type="BiDi"/>
+        <pin num="20" name="GPIO15" type="BiDi"/>
+        <pin num="21" name="GPIO16" type="BiDi"/>
+        <pin num="22" name="GPIO17" type="BiDi"/>
+        <pin num="23" name="GND" type="power_in"/>
+        <pin num="24" name="GPIO18" type="BiDi"/>
+        <pin num="25" name="GPIO19" type="BiDi"/>
+        <pin num="26" name="GPIO20" type="BiDi"/>
+        <pin num="27" name="GPIO21" type="BiDi"/>
+        <pin num="28" name="GND" type="power_in"/>
+        <pin num="29" name="GPIO22" type="BiDi"/>
+        <pin num="30" name="RUN" type="input"/>
+        <pin num="31" name="GPIO26_ADC0" type="BiDi"/>
+        <pin num="32" name="GPIO27_ADC1" type="BiDi"/>
+        <pin num="33" name="AGND" type="power_in"/>
+        <pin num="34" name="GPIO28_ADC2" type="BiDi"/>
+        <pin num="35" name="ADC_VREF" type="power_in"/>
+        <pin num="36" name="3V3" type="power_in"/>
+        <pin num="37" name="3V3_EN" type="input"/>
+        <pin num="38" name="GND" type="BiDi"/>
+        <pin num="39" name="VSYS" type="power_in"/>
+        <pin num="40" name="VBUS" type="power_in"/>
+        <pin num="41" name="SWCLK" type="input"/>
+        <pin num="42" name="GND" type="power_in"/>
+        <pin num="43" name="SWDIO" type="BiDi"/>
+      </pins>
+    </libpart>
+    <libpart lib="REYAX_RYLR896" part="REYAX_RYLR896">
+      <description>RYLR896 transceiver module</description>
+      <docs>http://reyax.com/products/rylr896/</docs>
+      <fields>
+        <field name="Reference">IC</field>
+        <field name="Value">REYAX_RYLR896</field>
+        <field name="Footprint">REYAXRYLR896</field>
+        <field name="Datasheet">http://reyax.com/products/rylr896/</field>
+        <field name="Description">RYLR896 transceiver module</field>
+        <field name="Height">25</field>
+        <field name="Manufacturer_Name">Reyax</field>
+        <field name="Manufacturer_Part_Number">REYAX RYLR896</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VDD" type="passive"/>
+        <pin num="2" name="NRST" type="passive"/>
+        <pin num="3" name="RXD" type="passive"/>
+        <pin num="4" name="TXD" type="passive"/>
+        <pin num="5" name="NC" type="NotConnected"/>
+        <pin num="6" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Switch" part="SW_MEC_5E">
+      <description>MEC 5E single pole normally-open tactile switch</description>
+      <docs>http://www.apem.com/int/index.php?controller=attachment&amp;id_attachment=1371</docs>
+      <footprints>
+        <fp>SW*MEC*5G*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">SW</field>
+        <field name="Value">SW_MEC_5E</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+        <pin num="3" name="K" type="passive"/>
+        <pin num="4" name="A" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="Connector_Generic">
+      <uri>C:\Program Files\KiCad\share\kicad\library/Connector_Generic.lib</uri>
+    </library>
+    <library logical="Device">
+      <uri>C:\Program Files\KiCad\share\kicad\library/Device.lib</uri>
+    </library>
+    <library logical="LED">
+      <uri>C:\Program Files\KiCad\share\kicad\library/LED.lib</uri>
+    </library>
+    <library logical="MCU_RaspberryPi_and_Boards">
+      <uri>C:/Users/azbai/Downloads/KiCad-RP-Pico-main/RP-Pico Libraries/MCU_RaspberryPi_and_Boards.lib</uri>
+    </library>
+    <library logical="REYAX_RYLR896">
+      <uri>C:/Users/azbai/Downloads/LIB_REYAX_RYLR896/REYAX_RYLR896/KiCad/REYAX_RYLR896.lib</uri>
+    </library>
+    <library logical="Switch">
+      <uri>C:\Program Files\KiCad\share\kicad\library/Switch.lib</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="Net-(D37-Pad2)">
+      <node ref="SW35" pin="1"/>
+      <node ref="D37" pin="2"/>
+    </net>
+    <net code="2" name="Net-(D33-Pad2)">
+      <node ref="SW31" pin="1"/>
+      <node ref="D33" pin="2"/>
+    </net>
+    <net code="3" name="Net-(SW31-Pad2)">
+      <node ref="SW31" pin="2"/>
+    </net>
+    <net code="4" name="Net-(SW31-Pad3)">
+      <node ref="SW31" pin="3"/>
+    </net>
+    <net code="5" name="Net-(SW35-Pad2)">
+      <node ref="SW35" pin="2"/>
+    </net>
+    <net code="6" name="Net-(SW35-Pad3)">
+      <node ref="SW35" pin="3"/>
+    </net>
+    <net code="7" name="Net-(SW3-Pad2)">
+      <node ref="SW3" pin="2"/>
+    </net>
+    <net code="8" name="Net-(R2-Pad1)">
+      <node ref="R2" pin="1"/>
+      <node ref="U1" pin="25"/>
+    </net>
+    <net code="9" name="Net-(D6-Pad2)">
+      <node ref="D6" pin="2"/>
+      <node ref="R2" pin="2"/>
+    </net>
+    <net code="10" name="Net-(D3-Pad2)">
+      <node ref="SW3" pin="1"/>
+      <node ref="D3" pin="2"/>
+    </net>
+    <net code="11" name="Net-(D5-Pad2)">
+      <node ref="R1" pin="2"/>
+      <node ref="D5" pin="2"/>
+    </net>
+    <net code="12" name="Net-(SW3-Pad3)">
+      <node ref="SW3" pin="3"/>
+    </net>
+    <net code="13" name="Net-(D4-Pad2)">
+      <node ref="SW4" pin="1"/>
+      <node ref="D4" pin="2"/>
+    </net>
+    <net code="14" name="Net-(SW4-Pad2)">
+      <node ref="SW4" pin="2"/>
+    </net>
+    <net code="15" name="Net-(SW4-Pad3)">
+      <node ref="SW4" pin="3"/>
+    </net>
+    <net code="16" name="Net-(D41-Pad2)">
+      <node ref="SW39" pin="1"/>
+      <node ref="D41" pin="2"/>
+    </net>
+    <net code="17" name="Net-(SW7-Pad3)">
+      <node ref="SW7" pin="3"/>
+    </net>
+    <net code="18" name="Net-(SW11-Pad3)">
+      <node ref="SW11" pin="3"/>
+    </net>
+    <net code="19" name="Net-(D13-Pad2)">
+      <node ref="D13" pin="2"/>
+      <node ref="SW11" pin="1"/>
+    </net>
+    <net code="20" name="Net-(D9-Pad2)">
+      <node ref="D9" pin="2"/>
+      <node ref="SW7" pin="1"/>
+    </net>
+    <net code="21" name="Net-(SW7-Pad2)">
+      <node ref="SW7" pin="2"/>
+    </net>
+    <net code="22" name="Net-(SW39-Pad2)">
+      <node ref="SW39" pin="2"/>
+    </net>
+    <net code="23" name="Net-(D21-Pad2)">
+      <node ref="SW19" pin="1"/>
+      <node ref="D21" pin="2"/>
+    </net>
+    <net code="24" name="Net-(SW19-Pad2)">
+      <node ref="SW19" pin="2"/>
+    </net>
+    <net code="25" name="Net-(SW19-Pad3)">
+      <node ref="SW19" pin="3"/>
+    </net>
+    <net code="26" name="Net-(D13-Pad1)">
+      <node ref="D3" pin="1"/>
+      <node ref="D9" pin="1"/>
+      <node ref="D33" pin="1"/>
+      <node ref="D13" pin="1"/>
+      <node ref="D21" pin="1"/>
+      <node ref="D17" pin="1"/>
+      <node ref="D37" pin="1"/>
+      <node ref="D41" pin="1"/>
+      <node ref="U1" pin="5"/>
+      <node ref="D29" pin="1"/>
+      <node ref="D25" pin="1"/>
+    </net>
+    <net code="27" name="Net-(D25-Pad2)">
+      <node ref="SW23" pin="1"/>
+      <node ref="D25" pin="2"/>
+    </net>
+    <net code="28" name="Net-(SW23-Pad2)">
+      <node ref="SW23" pin="2"/>
+    </net>
+    <net code="29" name="Net-(SW23-Pad3)">
+      <node ref="SW23" pin="3"/>
+    </net>
+    <net code="30" name="Net-(D29-Pad2)">
+      <node ref="D29" pin="2"/>
+      <node ref="SW27" pin="1"/>
+    </net>
+    <net code="31" name="Net-(SW27-Pad2)">
+      <node ref="SW27" pin="2"/>
+    </net>
+    <net code="32" name="Net-(SW27-Pad3)">
+      <node ref="SW27" pin="3"/>
+    </net>
+    <net code="33" name="Net-(SW39-Pad3)">
+      <node ref="SW39" pin="3"/>
+    </net>
+    <net code="34" name="Net-(D17-Pad2)">
+      <node ref="D17" pin="2"/>
+      <node ref="SW15" pin="1"/>
+    </net>
+    <net code="35" name="Net-(SW15-Pad2)">
+      <node ref="SW15" pin="2"/>
+    </net>
+    <net code="36" name="Net-(SW15-Pad3)">
+      <node ref="SW15" pin="3"/>
+    </net>
+    <net code="37" name="Net-(IC1-Pad2)">
+      <node ref="IC1" pin="2"/>
+    </net>
+    <net code="38" name="Net-(IC1-Pad5)">
+      <node ref="IC1" pin="5"/>
+    </net>
+    <net code="39" name="Net-(R1-Pad1)">
+      <node ref="R1" pin="1"/>
+      <node ref="U1" pin="24"/>
+    </net>
+    <net code="40" name="Net-(U1-Pad13)">
+      <node ref="U1" pin="13"/>
+    </net>
+    <net code="41" name="Net-(SW25-Pad4)">
+      <node ref="SW27" pin="4"/>
+      <node ref="SW25" pin="4"/>
+      <node ref="SW26" pin="4"/>
+      <node ref="U1" pin="16"/>
+      <node ref="SW28" pin="4"/>
+    </net>
+    <net code="42" name="Net-(SW29-Pad4)">
+      <node ref="SW31" pin="4"/>
+      <node ref="SW29" pin="4"/>
+      <node ref="SW30" pin="4"/>
+      <node ref="SW32" pin="4"/>
+      <node ref="U1" pin="17"/>
+    </net>
+    <net code="43" name="Net-(D5-Pad1)">
+      <node ref="IC1" pin="1"/>
+      <node ref="D6" pin="1"/>
+      <node ref="U1" pin="18"/>
+      <node ref="D5" pin="1"/>
+    </net>
+    <net code="44" name="Net-(SW33-Pad4)">
+      <node ref="SW36" pin="4"/>
+      <node ref="U1" pin="19"/>
+      <node ref="SW34" pin="4"/>
+      <node ref="SW33" pin="4"/>
+      <node ref="SW35" pin="4"/>
+    </net>
+    <net code="45" name="Net-(U1-Pad37)">
+      <node ref="U1" pin="37"/>
+    </net>
+    <net code="46" name="Net-(J1-Pad1)">
+      <node ref="J1" pin="1"/>
+      <node ref="U1" pin="38"/>
+    </net>
+    <net code="47" name="Net-(U1-Pad39)">
+      <node ref="U1" pin="39"/>
+    </net>
+    <net code="48" name="Net-(J1-Pad2)">
+      <node ref="U1" pin="40"/>
+      <node ref="J1" pin="2"/>
+    </net>
+    <net code="49" name="Net-(U1-Pad41)">
+      <node ref="U1" pin="41"/>
+    </net>
+    <net code="50" name="Net-(U1-Pad42)">
+      <node ref="U1" pin="42"/>
+    </net>
+    <net code="51" name="Net-(U1-Pad43)">
+      <node ref="U1" pin="43"/>
+    </net>
+    <net code="52" name="Net-(IC1-Pad6)">
+      <node ref="IC1" pin="6"/>
+      <node ref="U1" pin="36"/>
+    </net>
+    <net code="53" name="Net-(U1-Pad8)">
+      <node ref="U1" pin="8"/>
+    </net>
+    <net code="54" name="Net-(U1-Pad28)">
+      <node ref="U1" pin="28"/>
+    </net>
+    <net code="55" name="Net-(IC1-Pad4)">
+      <node ref="U1" pin="21"/>
+      <node ref="IC1" pin="4"/>
+    </net>
+    <net code="56" name="Net-(U1-Pad23)">
+      <node ref="U1" pin="23"/>
+    </net>
+    <net code="57" name="Net-(U1-Pad26)">
+      <node ref="U1" pin="26"/>
+    </net>
+    <net code="58" name="Net-(U1-Pad27)">
+      <node ref="U1" pin="27"/>
+    </net>
+    <net code="59" name="Net-(R3-Pad1)">
+      <node ref="R3" pin="1"/>
+      <node ref="U1" pin="29"/>
+    </net>
+    <net code="60" name="Net-(U1-Pad30)">
+      <node ref="U1" pin="30"/>
+    </net>
+    <net code="61" name="Net-(U1-Pad31)">
+      <node ref="U1" pin="31"/>
+    </net>
+    <net code="62" name="Net-(U1-Pad32)">
+      <node ref="U1" pin="32"/>
+    </net>
+    <net code="63" name="Net-(U1-Pad33)">
+      <node ref="U1" pin="33"/>
+    </net>
+    <net code="64" name="Net-(U1-Pad34)">
+      <node ref="U1" pin="34"/>
+    </net>
+    <net code="65" name="Net-(U1-Pad35)">
+      <node ref="U1" pin="35"/>
+    </net>
+    <net code="66" name="Net-(J1-Pad4)">
+      <node ref="J1" pin="4"/>
+      <node ref="U1" pin="2"/>
+    </net>
+    <net code="67" name="Net-(J1-Pad3)">
+      <node ref="J1" pin="3"/>
+      <node ref="U1" pin="1"/>
+    </net>
+    <net code="68" name="Net-(D43-Pad1)">
+      <node ref="U1" pin="3"/>
+      <node ref="D43" pin="1"/>
+    </net>
+    <net code="69" name="Net-(IC1-Pad3)">
+      <node ref="U1" pin="22"/>
+      <node ref="IC1" pin="3"/>
+    </net>
+    <net code="70" name="Net-(D43-Pad2)">
+      <node ref="D43" pin="2"/>
+      <node ref="R3" pin="2"/>
+    </net>
+    <net code="71" name="Net-(SW11-Pad2)">
+      <node ref="SW11" pin="2"/>
+    </net>
+    <net code="72" name="Net-(D12-Pad2)">
+      <node ref="SW10" pin="1"/>
+      <node ref="D12" pin="2"/>
+    </net>
+    <net code="73" name="Net-(D8-Pad2)">
+      <node ref="SW6" pin="1"/>
+      <node ref="D8" pin="2"/>
+    </net>
+    <net code="74" name="Net-(SW6-Pad2)">
+      <node ref="SW6" pin="2"/>
+    </net>
+    <net code="75" name="Net-(SW6-Pad3)">
+      <node ref="SW6" pin="3"/>
+    </net>
+    <net code="76" name="Net-(SW5-Pad4)">
+      <node ref="SW7" pin="4"/>
+      <node ref="SW8" pin="4"/>
+      <node ref="SW6" pin="4"/>
+      <node ref="SW5" pin="4"/>
+      <node ref="U1" pin="10"/>
+    </net>
+    <net code="77" name="Net-(SW10-Pad4)">
+      <node ref="SW10" pin="4"/>
+      <node ref="SW9" pin="4"/>
+      <node ref="U1" pin="11"/>
+      <node ref="SW12" pin="4"/>
+      <node ref="SW11" pin="4"/>
+    </net>
+    <net code="78" name="Net-(D2-Pad2)">
+      <node ref="SW2" pin="1"/>
+      <node ref="D2" pin="2"/>
+    </net>
+    <net code="79" name="Net-(SW2-Pad2)">
+      <node ref="SW2" pin="2"/>
+    </net>
+    <net code="80" name="Net-(SW2-Pad3)">
+      <node ref="SW2" pin="3"/>
+    </net>
+    <net code="81" name="Net-(SW1-Pad4)">
+      <node ref="SW1" pin="4"/>
+      <node ref="SW4" pin="4"/>
+      <node ref="SW2" pin="4"/>
+      <node ref="SW3" pin="4"/>
+      <node ref="U1" pin="9"/>
+    </net>
+    <net code="82" name="Net-(D16-Pad2)">
+      <node ref="D16" pin="2"/>
+      <node ref="SW14" pin="1"/>
+    </net>
+    <net code="83" name="Net-(SW10-Pad2)">
+      <node ref="SW10" pin="2"/>
+    </net>
+    <net code="84" name="Net-(SW10-Pad3)">
+      <node ref="SW10" pin="3"/>
+    </net>
+    <net code="85" name="Net-(D40-Pad2)">
+      <node ref="SW38" pin="1"/>
+      <node ref="D40" pin="2"/>
+    </net>
+    <net code="86" name="Net-(SW38-Pad2)">
+      <node ref="SW38" pin="2"/>
+    </net>
+    <net code="87" name="Net-(SW38-Pad3)">
+      <node ref="SW38" pin="3"/>
+    </net>
+    <net code="88" name="Net-(SW29-Pad2)">
+      <node ref="SW29" pin="2"/>
+    </net>
+    <net code="89" name="Net-(SW29-Pad3)">
+      <node ref="SW29" pin="3"/>
+    </net>
+    <net code="90" name="Net-(D31-Pad2)">
+      <node ref="SW29" pin="1"/>
+      <node ref="D31" pin="2"/>
+    </net>
+    <net code="91" name="Net-(D27-Pad2)">
+      <node ref="SW25" pin="1"/>
+      <node ref="D27" pin="2"/>
+    </net>
+    <net code="92" name="Net-(SW25-Pad2)">
+      <node ref="SW25" pin="2"/>
+    </net>
+    <net code="93" name="Net-(SW25-Pad3)">
+      <node ref="SW25" pin="3"/>
+    </net>
+    <net code="94" name="Net-(D23-Pad2)">
+      <node ref="SW21" pin="1"/>
+      <node ref="D23" pin="2"/>
+    </net>
+    <net code="95" name="Net-(SW21-Pad2)">
+      <node ref="SW21" pin="2"/>
+    </net>
+    <net code="96" name="Net-(SW21-Pad3)">
+      <node ref="SW21" pin="3"/>
+    </net>
+    <net code="97" name="Net-(D35-Pad2)">
+      <node ref="SW33" pin="1"/>
+      <node ref="D35" pin="2"/>
+    </net>
+    <net code="98" name="Net-(D39-Pad2)">
+      <node ref="D39" pin="2"/>
+      <node ref="SW37" pin="1"/>
+    </net>
+    <net code="99" name="Net-(SW37-Pad2)">
+      <node ref="SW37" pin="2"/>
+    </net>
+    <net code="100" name="Net-(SW37-Pad3)">
+      <node ref="SW37" pin="3"/>
+    </net>
+    <net code="101" name="Net-(SW33-Pad2)">
+      <node ref="SW33" pin="2"/>
+    </net>
+    <net code="102" name="Net-(SW33-Pad3)">
+      <node ref="SW33" pin="3"/>
+    </net>
+    <net code="103" name="Net-(D11-Pad2)">
+      <node ref="SW9" pin="1"/>
+      <node ref="D11" pin="2"/>
+    </net>
+    <net code="104" name="Net-(D7-Pad2)">
+      <node ref="D7" pin="2"/>
+      <node ref="SW5" pin="1"/>
+    </net>
+    <net code="105" name="Net-(SW5-Pad2)">
+      <node ref="SW5" pin="2"/>
+    </net>
+    <net code="106" name="Net-(SW5-Pad3)">
+      <node ref="SW5" pin="3"/>
+    </net>
+    <net code="107" name="Net-(D1-Pad2)">
+      <node ref="SW1" pin="1"/>
+      <node ref="D1" pin="2"/>
+    </net>
+    <net code="108" name="Net-(SW1-Pad2)">
+      <node ref="SW1" pin="2"/>
+    </net>
+    <net code="109" name="Net-(SW1-Pad3)">
+      <node ref="SW1" pin="3"/>
+    </net>
+    <net code="110" name="Net-(D15-Pad2)">
+      <node ref="D15" pin="2"/>
+      <node ref="SW13" pin="1"/>
+    </net>
+    <net code="111" name="Net-(D19-Pad2)">
+      <node ref="D19" pin="2"/>
+      <node ref="SW17" pin="1"/>
+    </net>
+    <net code="112" name="Net-(SW17-Pad2)">
+      <node ref="SW17" pin="2"/>
+    </net>
+    <net code="113" name="Net-(SW17-Pad3)">
+      <node ref="SW17" pin="3"/>
+    </net>
+    <net code="114" name="Net-(D1-Pad1)">
+      <node ref="D15" pin="1"/>
+      <node ref="D23" pin="1"/>
+      <node ref="D1" pin="1"/>
+      <node ref="U1" pin="7"/>
+      <node ref="D27" pin="1"/>
+      <node ref="D31" pin="1"/>
+      <node ref="D19" pin="1"/>
+      <node ref="D11" pin="1"/>
+      <node ref="D7" pin="1"/>
+      <node ref="D39" pin="1"/>
+      <node ref="D35" pin="1"/>
+    </net>
+    <net code="115" name="Net-(D12-Pad1)">
+      <node ref="D8" pin="1"/>
+      <node ref="D28" pin="1"/>
+      <node ref="D36" pin="1"/>
+      <node ref="D40" pin="1"/>
+      <node ref="D20" pin="1"/>
+      <node ref="D24" pin="1"/>
+      <node ref="D32" pin="1"/>
+      <node ref="D16" pin="1"/>
+      <node ref="U1" pin="6"/>
+      <node ref="D2" pin="1"/>
+      <node ref="D12" pin="1"/>
+    </net>
+    <net code="116" name="Net-(SW13-Pad2)">
+      <node ref="SW13" pin="2"/>
+    </net>
+    <net code="117" name="Net-(SW13-Pad3)">
+      <node ref="SW13" pin="3"/>
+    </net>
+    <net code="118" name="Net-(SW9-Pad2)">
+      <node ref="SW9" pin="2"/>
+    </net>
+    <net code="119" name="Net-(SW9-Pad3)">
+      <node ref="SW9" pin="3"/>
+    </net>
+    <net code="120" name="Net-(D42-Pad2)">
+      <node ref="SW40" pin="1"/>
+      <node ref="D42" pin="2"/>
+    </net>
+    <net code="121" name="Net-(SW40-Pad2)">
+      <node ref="SW40" pin="2"/>
+    </net>
+    <net code="122" name="Net-(SW40-Pad3)">
+      <node ref="SW40" pin="3"/>
+    </net>
+    <net code="123" name="Net-(SW37-Pad4)">
+      <node ref="U1" pin="20"/>
+      <node ref="SW40" pin="4"/>
+      <node ref="SW39" pin="4"/>
+      <node ref="SW37" pin="4"/>
+      <node ref="SW38" pin="4"/>
+    </net>
+    <net code="124" name="Net-(D18-Pad2)">
+      <node ref="SW16" pin="1"/>
+      <node ref="D18" pin="2"/>
+    </net>
+    <net code="125" name="Net-(SW16-Pad2)">
+      <node ref="SW16" pin="2"/>
+    </net>
+    <net code="126" name="Net-(SW16-Pad3)">
+      <node ref="SW16" pin="3"/>
+    </net>
+    <net code="127" name="Net-(D34-Pad2)">
+      <node ref="SW32" pin="1"/>
+      <node ref="D34" pin="2"/>
+    </net>
+    <net code="128" name="Net-(SW32-Pad2)">
+      <node ref="SW32" pin="2"/>
+    </net>
+    <net code="129" name="Net-(SW32-Pad3)">
+      <node ref="SW32" pin="3"/>
+    </net>
+    <net code="130" name="Net-(SW28-Pad3)">
+      <node ref="SW28" pin="3"/>
+    </net>
+    <net code="131" name="Net-(D38-Pad2)">
+      <node ref="D38" pin="2"/>
+      <node ref="SW36" pin="1"/>
+    </net>
+    <net code="132" name="Net-(SW36-Pad2)">
+      <node ref="SW36" pin="2"/>
+    </net>
+    <net code="133" name="Net-(SW36-Pad3)">
+      <node ref="SW36" pin="3"/>
+    </net>
+    <net code="134" name="Net-(SW24-Pad2)">
+      <node ref="SW24" pin="2"/>
+    </net>
+    <net code="135" name="Net-(D22-Pad2)">
+      <node ref="D22" pin="2"/>
+      <node ref="SW20" pin="1"/>
+    </net>
+    <net code="136" name="Net-(SW20-Pad2)">
+      <node ref="SW20" pin="2"/>
+    </net>
+    <net code="137" name="Net-(SW20-Pad3)">
+      <node ref="SW20" pin="3"/>
+    </net>
+    <net code="138" name="Net-(D26-Pad2)">
+      <node ref="D26" pin="2"/>
+      <node ref="SW24" pin="1"/>
+    </net>
+    <net code="139" name="Net-(SW24-Pad3)">
+      <node ref="SW24" pin="3"/>
+    </net>
+    <net code="140" name="Net-(D30-Pad2)">
+      <node ref="SW28" pin="1"/>
+      <node ref="D30" pin="2"/>
+    </net>
+    <net code="141" name="Net-(SW28-Pad2)">
+      <node ref="SW28" pin="2"/>
+    </net>
+    <net code="142" name="Net-(D24-Pad2)">
+      <node ref="SW22" pin="1"/>
+      <node ref="D24" pin="2"/>
+    </net>
+    <net code="143" name="Net-(D20-Pad2)">
+      <node ref="SW18" pin="1"/>
+      <node ref="D20" pin="2"/>
+    </net>
+    <net code="144" name="Net-(SW18-Pad2)">
+      <node ref="SW18" pin="2"/>
+    </net>
+    <net code="145" name="Net-(SW18-Pad3)">
+      <node ref="SW18" pin="3"/>
+    </net>
+    <net code="146" name="Net-(SW17-Pad4)">
+      <node ref="SW17" pin="4"/>
+      <node ref="U1" pin="14"/>
+      <node ref="SW19" pin="4"/>
+      <node ref="SW18" pin="4"/>
+      <node ref="SW20" pin="4"/>
+    </net>
+    <net code="147" name="Net-(SW13-Pad4)">
+      <node ref="U1" pin="12"/>
+      <node ref="SW14" pin="4"/>
+      <node ref="SW15" pin="4"/>
+      <node ref="SW13" pin="4"/>
+      <node ref="SW16" pin="4"/>
+    </net>
+    <net code="148" name="Net-(SW22-Pad2)">
+      <node ref="SW22" pin="2"/>
+    </net>
+    <net code="149" name="Net-(SW22-Pad3)">
+      <node ref="SW22" pin="3"/>
+    </net>
+    <net code="150" name="Net-(SW21-Pad4)">
+      <node ref="SW23" pin="4"/>
+      <node ref="SW22" pin="4"/>
+      <node ref="SW21" pin="4"/>
+      <node ref="SW24" pin="4"/>
+      <node ref="U1" pin="15"/>
+    </net>
+    <net code="151" name="Net-(D28-Pad2)">
+      <node ref="D28" pin="2"/>
+      <node ref="SW26" pin="1"/>
+    </net>
+    <net code="152" name="Net-(SW14-Pad2)">
+      <node ref="SW14" pin="2"/>
+    </net>
+    <net code="153" name="Net-(SW14-Pad3)">
+      <node ref="SW14" pin="3"/>
+    </net>
+    <net code="154" name="Net-(D10-Pad2)">
+      <node ref="D10" pin="2"/>
+      <node ref="SW8" pin="1"/>
+    </net>
+    <net code="155" name="Net-(D14-Pad2)">
+      <node ref="SW12" pin="1"/>
+      <node ref="D14" pin="2"/>
+    </net>
+    <net code="156" name="Net-(SW12-Pad2)">
+      <node ref="SW12" pin="2"/>
+    </net>
+    <net code="157" name="Net-(SW12-Pad3)">
+      <node ref="SW12" pin="3"/>
+    </net>
+    <net code="158" name="Net-(SW8-Pad2)">
+      <node ref="SW8" pin="2"/>
+    </net>
+    <net code="159" name="Net-(SW8-Pad3)">
+      <node ref="SW8" pin="3"/>
+    </net>
+    <net code="160" name="Net-(D10-Pad1)">
+      <node ref="D14" pin="1"/>
+      <node ref="D10" pin="1"/>
+      <node ref="D18" pin="1"/>
+      <node ref="D4" pin="1"/>
+      <node ref="D42" pin="1"/>
+      <node ref="D30" pin="1"/>
+      <node ref="D38" pin="1"/>
+      <node ref="D26" pin="1"/>
+      <node ref="D22" pin="1"/>
+      <node ref="D34" pin="1"/>
+      <node ref="U1" pin="4"/>
+    </net>
+    <net code="161" name="Net-(SW26-Pad2)">
+      <node ref="SW26" pin="2"/>
+    </net>
+    <net code="162" name="Net-(SW26-Pad3)">
+      <node ref="SW26" pin="3"/>
+    </net>
+    <net code="163" name="Net-(D32-Pad2)">
+      <node ref="D32" pin="2"/>
+      <node ref="SW30" pin="1"/>
+    </net>
+    <net code="164" name="Net-(SW30-Pad2)">
+      <node ref="SW30" pin="2"/>
+    </net>
+    <net code="165" name="Net-(SW30-Pad3)">
+      <node ref="SW30" pin="3"/>
+    </net>
+    <net code="166" name="Net-(D36-Pad2)">
+      <node ref="D36" pin="2"/>
+      <node ref="SW34" pin="1"/>
+    </net>
+    <net code="167" name="Net-(SW34-Pad2)">
+      <node ref="SW34" pin="2"/>
+    </net>
+    <net code="168" name="Net-(SW34-Pad3)">
+      <node ref="SW34" pin="3"/>
+    </net>
+  </nets>
+</export>

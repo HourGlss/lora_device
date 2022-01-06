@@ -1,0 +1,190 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Connector:Conn_01x06_Male J1
+U 1 1 61CD1ABD
+P 5100 1800
+F 0 "J1" H 5208 2181 50  0000 C CNN
+F 1 "Conn_01x06_Male" H 5208 2090 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Horizontal" H 5100 1800 50  0001 C CNN
+F 3 "~" H 5100 1800 50  0001 C CNN
+	1    5100 1800
+	0    1    1    0   
+$EndComp
+$Comp
+L LED:LD271 D2
+U 1 1 61CD30B7
+P 7050 4700
+F 0 "D2" H 7000 4990 50  0000 C CNN
+F 1 "LD271" H 7000 4899 50  0000 C CNN
+F 2 "LED_THT:LED_D5.0mm_IRGrey" H 7050 4875 50  0001 C CNN
+F 3 "http://www.alliedelec.com/m/d/40788c34903a719969df15f1fbea1056.pdf" H 7000 4700 50  0001 C CNN
+	1    7050 4700
+	-1   0    0    1   
+$EndComp
+$Comp
+L LED:LD271 D1
+U 1 1 61CD66B7
+P 7050 3650
+F 0 "D1" H 7000 3940 50  0000 C CNN
+F 1 "LD271" H 7000 3849 50  0000 C CNN
+F 2 "LED_THT:LED_D5.0mm_IRGrey" H 7050 3825 50  0001 C CNN
+F 3 "http://www.alliedelec.com/m/d/40788c34903a719969df15f1fbea1056.pdf" H 7000 3650 50  0001 C CNN
+	1    7050 3650
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:R R1
+U 1 1 61CD7CDC
+P 6650 3650
+F 0 "R1" H 6720 3696 50  0000 L CNN
+F 1 "R" H 6720 3605 50  0000 L CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal" V 6580 3650 50  0001 C CNN
+F 3 "~" H 6650 3650 50  0001 C CNN
+	1    6650 3650
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R2
+U 1 1 61CD8580
+P 6650 4700
+F 0 "R2" H 6720 4746 50  0000 L CNN
+F 1 "R" H 6720 4655 50  0000 L CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal" V 6580 4700 50  0001 C CNN
+F 3 "~" H 6650 4700 50  0001 C CNN
+	1    6650 4700
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR0101
+U 1 1 61CE040B
+P 7600 3650
+F 0 "#PWR0101" H 7600 3400 50  0001 C CNN
+F 1 "GND" H 7605 3477 50  0000 C CNN
+F 2 "" H 7600 3650 50  0001 C CNN
+F 3 "" H 7600 3650 50  0001 C CNN
+	1    7600 3650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6500 4600 6500 3650
+Wire Wire Line
+	6800 3650 6950 3650
+Wire Wire Line
+	7250 3650 7600 3650
+$Comp
+L power:GND #PWR0102
+U 1 1 61CE51F1
+P 7600 4700
+F 0 "#PWR0102" H 7600 4450 50  0001 C CNN
+F 1 "GND" H 7605 4527 50  0000 C CNN
+F 2 "" H 7600 4700 50  0001 C CNN
+F 3 "" H 7600 4700 50  0001 C CNN
+	1    7600 4700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5750 4700 6500 4700
+Wire Wire Line
+	6800 4700 6950 4700
+Wire Wire Line
+	7250 4700 7600 4700
+$Comp
+L power:GND #PWR0103
+U 1 1 61CE9B5F
+P 3800 3000
+F 0 "#PWR0103" H 3800 2750 50  0001 C CNN
+F 1 "GND" H 3805 2827 50  0000 C CNN
+F 2 "" H 3800 3000 50  0001 C CNN
+F 3 "" H 3800 3000 50  0001 C CNN
+	1    3800 3000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4350 3000 3800 3000
+Wire Wire Line
+	5300 2450 5300 2000
+$Comp
+L power:GND #PWR0104
+U 1 1 61CF7908
+P 4800 2000
+F 0 "#PWR0104" H 4800 1750 50  0001 C CNN
+F 1 "GND" H 4805 1827 50  0000 C CNN
+F 2 "" H 4800 2000 50  0001 C CNN
+F 3 "" H 4800 2000 50  0001 C CNN
+	1    4800 2000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5100 2000 5100 2550
+Wire Wire Line
+	5100 2550 4100 2550
+Wire Wire Line
+	4100 2550 4100 2900
+Wire Wire Line
+	4100 2900 4350 2900
+Wire Wire Line
+	5000 2000 5000 2150
+Wire Wire Line
+	5000 2650 4350 2650
+Wire Wire Line
+	4350 2650 4350 2800
+Wire Wire Line
+	5750 4600 6500 4600
+$Comp
+L pico_repeater-rescue:Pico-MCU_pico U1
+U 1 1 61CCFB78
+P 5050 3750
+F 0 "U1" H 5050 4965 50  0000 C CNN
+F 1 "Pico" H 5050 4874 50  0000 C CNN
+F 2 "pico:RPi_Pico_SMD_TH" V 5050 3750 50  0001 C CNN
+F 3 "" H 5050 3750 50  0001 C CNN
+	1    5050 3750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x03_Female J2
+U 1 1 61D0A450
+P 5550 2900
+F 0 "J2" H 5578 2926 50  0000 L CNN
+F 1 "Conn_01x03_Female" H 5578 2835 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Horizontal" H 5550 2900 50  0001 C CNN
+F 3 "~" H 5550 2900 50  0001 C CNN
+	1    5550 2900
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	5300 2450 5950 2450
+Wire Wire Line
+	5200 2000 5200 2150
+Wire Wire Line
+	5200 2150 5000 2150
+Connection ~ 5000 2150
+Wire Wire Line
+	5000 2150 5000 2650
+Wire Wire Line
+	5200 2000 5200 1700
+Wire Wire Line
+	5200 1700 5000 1700
+Wire Wire Line
+	5000 1700 5000 2000
+Connection ~ 5200 2000
+Connection ~ 5000 2000
+Wire Wire Line
+	5750 3200 5950 3200
+Wire Wire Line
+	5950 2450 5950 3200
+$EndSCHEMATC

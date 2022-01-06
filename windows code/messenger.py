@@ -1,5 +1,3 @@
-import curses
-import sys
 import time
 from transitions import Machine
 import fake_lcd
