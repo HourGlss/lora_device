@@ -102,14 +102,14 @@ class Device(object):
 
     def print_screen(self):
         func = inspect.currentframe().f_back.f_code
-        logging.debug(" ")
-        logging.debug("device.current_screen {}".format(self.current_screen))
-        logging.debug("device.next_screen {}".format(self.next_screen))
+        # logging.debug(" ")
+        # logging.debug("device.current_screen {}".format(self.current_screen))
+        # logging.debug("device.next_screen {}".format(self.next_screen))
         lcd_redrawn = False
         if len(self.next_screen) >= 80:
             self.next_screen = self.next_screen[:79]
         if self.next_screen != self.current_screen:
-            logging.debug("something actually on the screen changed")
+            # logging.debug("something actually on the screen changed")
             x = 0
             y = 0
             i = 0
@@ -122,9 +122,8 @@ class Device(object):
                 x = i % self.__lcd.width
             self.current_screen = self.next_screen
             lcd_redrawn = True
-            logging.debug("Got past printing")
         if self.next_cursor_row != self.cursor_row or self.next_cursor_col != self.cursor_col:
-            logging.debug("the cursor changed")
+            # logging.debug("the cursor changed")
             if not lcd_redrawn:
                 x = 0
                 y = 0

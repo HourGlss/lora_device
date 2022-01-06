@@ -170,9 +170,28 @@ class ComposeMenu(AbstractState):
 
         text_col = int(len(self.device.input_buffer) + self.device.initial_cursor_col)
         text_row = int((len(self.device.input_buffer) + self.device.initial_cursor_row) / 20)
+        string_num = self.device.initial_cursor_col + self.device.cursor_col + (self.device.cursor_row * 20)
+        if c == 'space':
+            c = ' '
+        logging.debug(self.device.next_cursor_col)
+        logging.debug(self.device.next_cursor_row)
+        if len(self.device.input_buffer) < 40:
+            self.device.next_input_buffer = self.device.input_buffer[:string_num] + c + self.device.input_buffer[string_num:]
+            if self.device.next_cursor_col == self.device.lcd_width - 1:
+                logging.debug("went to next line")
+                self.device.next_cursor_col = 0
+                self.device.next_cursor_row = self.device.next_cursor_row + 1
 
-        # if c == 'space':
-        #     c = ' '
+            else:
+                logging.debug("printing on line")
+                self.device.next_cursor_col = self.device.next_cursor_col + 1
+        else:
+            logging.debug("stripping last char")
+            self.device.next_input_buffer = self.device.input_buffer[:-1]
+            self.device.next_cursor_col = self.device.next_cursor_col - 1
+
+
+        self.device.toggle_lcd_event_flag()
 
     def delete(self):
         string_num = self.device.cursor_col + (self.device.cursor_row * self.device.lcd_width) - self.device.initial_cursor_col
