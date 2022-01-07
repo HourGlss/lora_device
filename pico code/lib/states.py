@@ -1,21 +1,15 @@
-from abc import ABC, abstractmethod
-
-
-class AbstractState(ABC):
+class AbstractState(object):
 
     def __init__(self, d):
         self.device = d
         self.nextState = None
 
-    @abstractmethod
     def initial(self):
         pass
 
-    @abstractmethod
     def use_keyboard_input(self, kb: dict):
         pass
 
-    @abstractmethod
     def screen(self):
         pass
 
@@ -41,15 +35,12 @@ class AbstractState(ABC):
             # increments the column
             self.device.next_cursor_col = self.device.cursor_col + 1
 
-    @abstractmethod
     def on_enter(self):
         pass
 
-    @abstractmethod
     def write_char(self, c):
         pass
 
-    @abstractmethod
     def delete(self):
         pass
 

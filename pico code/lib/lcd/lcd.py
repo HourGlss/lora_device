@@ -171,11 +171,16 @@ class LCD(object):
         """The cursor position as a 2-tuple (row, col)."""
         return (self._row, self._col)
 
+    def draw_cursor(self):
+        self.set_cursor_mode(CursorMode.LINE)
+
     def set_cursor_pos(self, row, col):
         if not (0 <= row < self.num_rows):
             raise ValueError('row should be in range 0-{}'.format(self.num_rows - 1))
         if not (0 <= col < self.num_cols):
             raise ValueError('col should be in range 0-{}'.format(self.num_cols - 1))
+        row = int(row)
+        col = int(col)
         self._row = row
         self._col = col
         self.command(_LCD_SETDDRAMADDR | self._row_offsets[row] + col)

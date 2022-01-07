@@ -1,21 +1,27 @@
-import board
+from states import MainMenu, SendMenu
+from device import Device
 import busio
-import time
-from digitalio import DigitalInOut, Direction, Pull
+import board
+
+from lcd.lcd import LCD
+from lcd.i2c_pcf8574_interface import I2CPCF8574Interface
+from lcd.lcd import CursorMode
+from reyax.rylr896 import RYLR896
+
 
 class Driver(object):
     def __init__(self):
-
-
-    def get_keyboard_state(self):
-
+        pass
 
     def main(self):
+        lcd_i2c = busio.I2C(scl=board.GP1, sda=board.GP0)
+        lcd = LCD(I2CPCF8574Interface(lcd_i2c, 0x27), num_rows=4, num_cols=20)
+        lcd.set_backlight(True)
+        lora = RYLR896(rx=board.GP5,tx=board.GP4,name="lora",debug=False,timeout=.05)
         d = Device(lcd, lora)
         current_state = MainMenu(d)
         while True:
             state_change = False
-
             # check lora to see if received
             d.get_message()
             # get keyboard input
@@ -35,11 +41,9 @@ class Driver(object):
             # if the state has changed allow the state to set some things up initially after the first draw
             if state_change:
                 current_state.initial()
-            # Quit for only windows version
-            if keyboard.is_pressed('`'):
-                sys.exit()
 
 
 if __name__ == "__main__":
     D = Driver()
     D.main()
+
