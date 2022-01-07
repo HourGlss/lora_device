@@ -142,6 +142,7 @@ class ComposeMenu(AbstractState):
                 self.write_char(k)
                 break
 
+
     def on_enter(self):
         func = inspect.currentframe().f_back.f_code
         # checks if the the cursor is at 3,0
