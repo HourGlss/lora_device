@@ -159,7 +159,7 @@ class ComposeMenu(AbstractState):
         elif self.device.cursor_row == 0 and self.device.cursor_col <= 5:
             # transitions to the sending_message state
             if self.device.input_buffer is not None:
-                self.nextState = SendingMessage(self.device)
+                self.nextState = SendingMenu(self.device)
                 self.device.data_to_send["data"] = str(self.device.next_input_buffer)
                 logging.debug(self.device.data_to_send["data"])
 
@@ -224,7 +224,7 @@ class ComposeMenu(AbstractState):
         else:
             return self.nextState
 
-class SendingMessage(AbstractState):
+class SendingMenu(AbstractState):
 
     def __init__(self, d):
         func = inspect.currentframe().f_back.f_code
@@ -234,7 +234,7 @@ class SendingMessage(AbstractState):
         self.device.next_cursor_col = 0
         self.device.function_toggle = False
         self.device.toggle_lcd_event_flag()
-        logging.debug("creating SendMenu")
+        logging.debug("creating SendingMessage")
 
     def initial(self):
         func = inspect.currentframe().f_back.f_code
@@ -249,6 +249,17 @@ class SendingMessage(AbstractState):
         for item in menu:
             self.device.next_screen += "{:<20}".format(item)
 
+        if self.device.lora.send(str(self.device.data_to_send["data"]), self.device.data_to_send["address"]):
+            # saves the data as last_sent for future use
+            self.last_sent = self.device.data_to_send
+            # transitions to the send_successful state
+            self.nextState = SendSuccessful(self.device)
+            # clears data_to_send for the next message
+            self.device.data_to_send = {}
+        else:
+            # if False transitions to the send_failed state
+            self.nextState = SendingMenu(self.device)
+
     def get_next_state(self):
         if self.nextState is None:
             return self
@@ -256,18 +267,7 @@ class SendingMessage(AbstractState):
             return self.nextState
 
     def use_keyboard_input(self, kb):
-        if kb['s']:
-            self.on_down()
-            return
-        if kb['w']:
-            self.on_up()
-            return
-        if kb['a']:
-            self.on_left()
-            return
-        if kb['d']:
-            self.on_right()
-            return
+        pass
 
     def screen(self):
         pass
@@ -281,6 +281,53 @@ class SendingMessage(AbstractState):
     def delete(self):
         pass
 
+class SendSuccessful(AbstractState):
+
+    def __init__(self, d):
+        func = inspect.currentframe().f_back.f_code
+        super().__init__(d)
+        self.addr_to_use = None
+        self.device.next_cursor_row = 0
+        self.device.next_cursor_col = 0
+        self.device.function_toggle = False
+        self.device.toggle_lcd_event_flag()
+        logging.debug("creating SendSuccessful")
+
+    def initial(self):
+        func = inspect.currentframe().f_back.f_code
+        logging.info("intial setup for SendSuccessful")
+        self.device.initial_cursor_row = 0
+        self.device.initial_cursor_col = 0
+        self.device.toggle_lcd_event_flag()
+        self.device.input_buffer = ""
+        self.device.next_input_buffer = ""
+        menu = ("Send Successful", "", "", "")
+        self.device.next_screen = ""
+        for item in menu:
+            self.device.next_screen += "{:<20}".format(item)
+
+    def get_next_state(self):
+        if self.nextState is None:
+            return self
+        else:
+            return self.nextState
+
+    def use_keyboard_input(self, kb):
+        if kb['enter']:
+            self.on_enter()
+            return
+    def screen(self):
+        pass
+
+    def on_enter(self):
+        self.nextState = MainMenu(self.device)
+        pass
+
+    def write_char(self, c):
+        pass
+
+    def delete(self):
+        pass
 
 class SettingsMenu(AbstractState):
 
