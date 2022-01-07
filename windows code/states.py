@@ -74,10 +74,6 @@ class AbstractState(ABC):
 
 
 class ComposeMenu(AbstractState):
-    """
-    TODO
-    Fleshman
-    """
 
     def __init__(self, d):
         func = inspect.currentframe().f_back.f_code
@@ -108,8 +104,8 @@ class ComposeMenu(AbstractState):
         func = inspect.currentframe().f_back.f_code
         if self.device.input_buffer != self.device.next_input_buffer:
             logging.info("input buffer is not empty")
-            self.device.next_screen = "{}{}{}".format(self.device.current_screen[0:5], self.device.next_input_buffer,
-                                                         self.device.current_screen[59:])
+            self.device.next_screen = "{}{:<55}{}".format(self.device.current_screen[0:5], self.device.next_input_buffer,
+                                                         self.device.current_screen[60:])
             self.device.input_buffer = self.device.next_input_buffer
 
             logging.debug("Length of next_screen is {}".format(len(self.device.next_screen)))
@@ -147,6 +143,7 @@ class ComposeMenu(AbstractState):
                 break
 
     def on_enter(self):
+        func = inspect.currentframe().f_back.f_code
         # checks if the the cursor is at 3,0
         if self.device.cursor_row == 3 and self.device.cursor_col == 0:
             # transitions to the main_menu state
@@ -162,15 +159,18 @@ class ComposeMenu(AbstractState):
             # transitions to the sending_message state
             if self.device.input_buffer is not None:
                 self.nextState = SendingMessage(self.device)
-                self.device.data_to_send["data"] = str(self.device.input_buffer)
+                self.device.data_to_send["data"] = str(self.device.next_input_buffer)
+                logging.debug(self.device.data_to_send["data"])
 
     def write_char(self, c):
         func = inspect.currentframe().f_back.f_code
         logging.info("attempting to add {}".format(c))
-
+        """
+        Shelved for later
+        
         text_col = int(len(self.device.input_buffer) + self.device.initial_cursor_col)
         text_row = int((len(self.device.input_buffer) + self.device.initial_cursor_row) / 20)
-        string_num = self.device.initial_cursor_col + self.device.cursor_col + (self.device.cursor_row * 20)
+        string_num = self.device.cursor_col + (self.device.cursor_row * 20) - self.device.initial_cursor_col
         if c == 'space':
             c = ' '
         logging.debug(self.device.next_cursor_col)
@@ -189,24 +189,32 @@ class ComposeMenu(AbstractState):
             logging.debug("stripping last char")
             self.device.next_input_buffer = self.device.input_buffer[:-1]
             self.device.next_cursor_col = self.device.next_cursor_col - 1
-
-
+        """
+        if c == 'space':
+            c = ' '
+        if len(self.device.input_buffer) < 54:
+            self.device.next_input_buffer = self.device.next_input_buffer + c
+            if self.device.next_cursor_col == self.device.lcd_width - 1:
+                self.device.next_cursor_col = 0
+                self.device.next_cursor_row = self.device.next_cursor_row + 1
+            else:
+                self.device.next_cursor_col = self.device.next_cursor_col + 1
+        else:
+            self.device.next_input_buffer = self.device.input_buffer[:-1]
+            self.device.next_cursor_col = self.device.next_cursor_col - 1
         self.device.toggle_lcd_event_flag()
 
     def delete(self):
-        string_num = self.device.cursor_col + (self.device.cursor_row * self.device.lcd_width) - self.device.initial_cursor_col
         if len(self.device.next_input_buffer) > 0:
-
-            if self.device.cursor_col > 0:
-                self.device.next_input_buffer = self.device.next_input_buffer[:string_num - 1] + self.device.next_input_buffer[string_num:]
-                self.device.toggle_lcd_event_flag()
+            self.device.next_input_buffer = self.device.next_input_buffer[:-1]
+            self.device.toggle_lcd_event_flag()
+            if self.device.next_cursor_col > 0:
                 self.device.next_cursor_col = self.device.cursor_col - 1
-            elif self.device.cursor_row == 0 and self.device.cursor_col == 0:
-                pass
-            else:
+            elif self.device.next_cursor_row > 0:
                 self.device.next_cursor_col = self.device.lcd_width - 1
                 self.device.next_cursor_row = self.device.cursor_row - 1
-                self.device.toggle_lcd_event_flag()
+            else:
+                pass
 
 
     def get_next_state(self):
@@ -218,28 +226,49 @@ class ComposeMenu(AbstractState):
 class SendingMessage(AbstractState):
 
     def __init__(self, d):
+        func = inspect.currentframe().f_back.f_code
         super().__init__(d)
+        self.addr_to_use = None
+        self.device.next_cursor_row = 0
+        self.device.next_cursor_col = 0
+        self.device.function_toggle = False
+        self.device.toggle_lcd_event_flag()
+        logging.debug("creating SendMenu")
+
+    def initial(self):
+        func = inspect.currentframe().f_back.f_code
+        logging.info("intial setup for SendingMessage")
+        self.device.initial_cursor_row = 0
+        self.device.initial_cursor_col = 0
+        self.device.toggle_lcd_event_flag()
+        self.device.input_buffer = ""
+        self.device.next_input_buffer = ""
+        menu = ("Sending message", "", "", "")
+        self.device.next_screen = ""
+        for item in menu:
+            self.device.next_screen += "{:<20}".format(item)
 
     def get_next_state(self):
-        pass
+        if self.nextState is None:
+            return self
+        else:
+            return self.nextState
 
     def use_keyboard_input(self, kb):
-        if kb['enter']:
-            self.on_enter()
-        if kb['left']:
-            self.on_left()
-        if kb['right']:
-            self.on_right()
-        if kb['up']:
-            self.on_up()
-        if kb['down']:
+        if kb['s']:
             self.on_down()
-        pass
+            return
+        if kb['w']:
+            self.on_up()
+            return
+        if kb['a']:
+            self.on_left()
+            return
+        if kb['d']:
+            self.on_right()
+            return
 
-    def print_input_buffer(self):
-        pass
-
-    def update_screen(self):
+    def screen(self):
         pass
 
     def on_enter(self):
@@ -250,6 +279,7 @@ class SendingMessage(AbstractState):
 
     def delete(self):
         pass
+
 
 class SettingsMenu(AbstractState):
 
