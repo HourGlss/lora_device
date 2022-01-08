@@ -419,6 +419,8 @@ class SetAddress(AbstractState):
         self.device.next_cursor_row = 0
         self.device.next_cursor_col = 0
         self.device.toggle_lcd_event_flag()
+        self.device.input_buffer = ""
+        self.device.next_input_buffer = ""
 
     def get_next_state(self):
         if self.nextState is None:
@@ -543,12 +545,8 @@ class SetNetworkid(AbstractState):
         self.device.next_cursor_row = 0
         self.device.next_cursor_col = 0
         self.device.toggle_lcd_event_flag()
-
-    def get_next_state(self):
-        if self.nextState is None:
-            return self
-        else:
-            return self.nextState
+        self.device.input_buffer = ""
+        self.device.next_input_buffer = ""
 
     def initial(self):
         func = inspect.currentframe().f_back.f_code
@@ -560,6 +558,12 @@ class SetNetworkid(AbstractState):
         menu = ("* Set ntwk (0-16)", "", "enter", "M")
         for item in menu:
             self.device.next_screen += "{:<20}".format(item)
+
+    def get_next_state(self):
+        if self.nextState is None:
+            return self
+        else:
+            return self.nextState
 
     def use_keyboard_input(self, kb):
         if kb['enter']:
