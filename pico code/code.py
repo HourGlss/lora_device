@@ -5,7 +5,6 @@ import board
 
 from lcd.lcd import LCD
 from lcd.i2c_pcf8574_interface import I2CPCF8574Interface
-from lcd.lcd import CursorMode
 from reyax.rylr896 import RYLR896
 
 

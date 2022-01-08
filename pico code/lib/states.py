@@ -52,10 +52,6 @@ class AbstractState(object):
 
 
 class ComposeMenu(AbstractState):
-    """
-    TODO
-    """
-
     def __init__(self, d):
         super().__init__(d)
         self.device.next_cursor_row = 0
@@ -78,13 +74,13 @@ class ComposeMenu(AbstractState):
 
     def screen(self):
         if self.device.input_buffer != self.device.next_input_buffer:
-            self.device.next_screen = "{}{}{}".format(self.device.current_screen[0:5], self.device.next_input_buffer,
-                                                         self.device.current_screen[59:])
+            self.device.next_screen = "{}{:<55}{}".format(self.device.current_screen[0:5],
+                                                          self.device.next_input_buffer,
+                                                          self.device.current_screen[60:])
             self.device.input_buffer = self.device.next_input_buffer
 
         else:
             pass
-
 
     def use_keyboard_input(self, kb):
         if kb['enter']:
@@ -116,46 +112,41 @@ class ComposeMenu(AbstractState):
                 break
 
     def on_enter(self):
-        # checks if the the cursor is at 3,0
         if self.device.cursor_row == 3 and self.device.cursor_col == 0:
-            # transitions to the main_menu state
             self.nextState = MainMenu(self.device)
-
-        # checks if the the cursor is at 3,2
         elif self.device.cursor_row == 3 and self.device.cursor_col == 2:
-            # transitions to the send_menu state
             self.nextState = SendMenu(self.device)
-
-        # checks if the the cursor is at 3,4
         elif self.device.cursor_row == 0 and self.device.cursor_col <= 5:
-            # transitions to the sending_message state
             if self.device.input_buffer is not None:
-                self.nextState = SendingMessage(self.device)
-                self.device.data_to_send["data"] = str(self.device.input_buffer)
+                self.nextState = SendingMenu(self.device)
+                self.device.data_to_send["data"] = str(self.device.next_input_buffer)
 
     def write_char(self, c):
-
-        text_col = int(len(self.device.input_buffer) + self.device.initial_cursor_col)
-        text_row = int((len(self.device.input_buffer) + self.device.initial_cursor_row) / 20)
-
-        # if c == 'space':
-        #     c = ' '
+        if c == 'space':
+            c = ' '
+        if len(self.device.input_buffer) < 54:
+            self.device.next_input_buffer = self.device.next_input_buffer + c
+            if self.device.next_cursor_col == self.device.lcd_width - 1:
+                self.device.next_cursor_col = 0
+                self.device.next_cursor_row = self.device.next_cursor_row + 1
+            else:
+                self.device.next_cursor_col = self.device.next_cursor_col + 1
+        else:
+            self.device.next_input_buffer = self.device.input_buffer[:-1]
+            self.device.next_cursor_col = self.device.next_cursor_col - 1
+        self.device.toggle_lcd_event_flag()
 
     def delete(self):
-        string_num = self.device.cursor_col + (self.device.cursor_row * self.device.lcd_width) - self.device.initial_cursor_col
         if len(self.device.next_input_buffer) > 0:
-
-            if self.device.cursor_col > 0:
-                self.device.next_input_buffer = self.device.next_input_buffer[:string_num - 1] + self.device.next_input_buffer[string_num:]
-                self.device.toggle_lcd_event_flag()
+            self.device.next_input_buffer = self.device.next_input_buffer[:-1]
+            self.device.toggle_lcd_event_flag()
+            if self.device.next_cursor_col > 0:
                 self.device.next_cursor_col = self.device.cursor_col - 1
-            elif self.device.cursor_row == 0 and self.device.cursor_col == 0:
-                pass
-            else:
+            elif self.device.next_cursor_row > 0:
                 self.device.next_cursor_col = self.device.lcd_width - 1
                 self.device.next_cursor_row = self.device.cursor_row - 1
-                self.device.toggle_lcd_event_flag()
-
+            else:
+                pass
 
     def get_next_state(self):
         if self.nextState is None:
@@ -163,7 +154,8 @@ class ComposeMenu(AbstractState):
         else:
             return self.nextState
 
-class SendingMessage(AbstractState):
+
+class SendingMenu(AbstractState):
 
     def __init__(self, d):
         super().__init__(d)
@@ -198,6 +190,7 @@ class SendingMessage(AbstractState):
 
     def delete(self):
         pass
+
 
 class SettingsMenu(AbstractState):
 
@@ -283,7 +276,6 @@ class SendMenu(AbstractState):
         self.device.function_toggle = False
         self.device.toggle_lcd_event_flag()
 
-
     def initial(self):
         self.device.initial_cursor_row = 0
         self.device.initial_cursor_col = 3
@@ -354,7 +346,6 @@ class SendMenu(AbstractState):
                 self.device.next_cursor_col = len(self.device.input_buffer) + 3
         else:
             self.device.next_cursor_col = 0
-
 
     def on_down(self):
         self.device.toggle_lcd_event_flag()

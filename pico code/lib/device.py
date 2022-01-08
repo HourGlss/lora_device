@@ -1,8 +1,5 @@
 import board
-import busio
-import time
 from digitalio import DigitalInOut, Direction, Pull
-
 from lcd.lcd import CursorMode
 
 class Messages(object):
@@ -47,8 +44,8 @@ class Device(object):
         self.next_input_buffer = ""
         self.setup_keyboard()
 
-    def get_keyboard_input(self):
-        all_possible = {
+    def __build_all_possible(self):
+        return {
             "a": False,
             "b": False,
             "c": False,
@@ -90,6 +87,10 @@ class Device(object):
             "backspace": False,
         }
 
+
+    def get_keyboard_input(self):
+
+        all_possible = self.__build_all_possible()
         meaning = [
             ['a', 'w', 'right shift', '1']
             ,
@@ -103,11 +104,7 @@ class Device(object):
             cpin.value = True
             for rpin in self.kb_rows:
                 if rpin.value:
-                    # print("SOMETHING")
-                    # print(c, r)
-                    # print(len(physicals), len(physicals[c]))
                     all_possible[meaning[c][r]] = True
-
                 r += 1
             c += 1
             cpin.value = False
@@ -129,7 +126,6 @@ class Device(object):
             for pin in pins:
                 temp = None
                 if type_of_input == "in":
-                    # print("Adding pin to IN pin, ROWS")
                     temp = DigitalInOut(pin)
                     temp.direction = Direction.INPUT
                     temp.pull = Pull.DOWN
@@ -138,11 +134,9 @@ class Device(object):
                     temp = DigitalInOut(pin)
                     temp.direction = Direction.OUTPUT
                     temp.value = False
-                    # print("Adding pin to OUT pin, COLS")
-
                     self.kb_cols.append(temp)
                 del temp
-        all_possible = {}
+        all_possible = self.__build_all_possible()
         self.__last_keyboard = all_possible
 
     def toggle_lcd_event_flag(self):
