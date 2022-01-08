@@ -668,28 +668,31 @@ class SetNetworkid(AbstractState):
 class ReceivedMenu(AbstractState):
 
     def __init__(self, d):
+        func = inspect.currentframe().f_back.f_code
         super().__init__(d)
+        logging.debug(" ")
+        self.addr_to_use = None
+        self.device.next_cursor_row = 0
+        self.device.next_cursor_col = 0
+        self.device.function_toggle = False
+        self.device.toggle_lcd_event_flag()
+        logging.debug("creating SendMenu")
 
     def get_next_state(self):
         pass
 
     def use_keyboard_input(self, kb):
+        if kb['s']:
+            self.on_down()
+            return
+        if kb['w']:
+            self.on_up()
+            return
         if kb['enter']:
             self.on_enter()
-        if kb['left']:
-            self.on_left()
-        if kb['right']:
-            self.on_right()
-        if kb['up']:
-            self.on_up()
-        if kb['down']:
-            self.on_down()
-        pass
+            return
 
-    def print_input_buffer(self):
-        pass
-
-    def update_screen(self):
+    def screen(self):
         pass
 
     def on_enter(self):
