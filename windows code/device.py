@@ -14,6 +14,9 @@ class Messages(object):
         if len(self.messages) > self.max_messages:
             self.messages.pop(0)
 
+    def __len__(self):
+        return len(self.messages)
+
 
 class Device(object):
     def __init__(self, lcd_to_use, lora_to_use):
