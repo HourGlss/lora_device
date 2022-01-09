@@ -668,7 +668,7 @@ class ReceivedMenu(AbstractState):
         logging.info("device.next_screen {}".format(self.device.next_screen))
         if self.sender != self.last_sender:
             logging.info("input buffer is not empty")
-            self.device.next_screen = "{}{:<5}{:<40}{:<20}".format(self.device.current_screen[0:15], str(self.sender),
+            self.device.next_screen = "{}{:<6}{:<40}{:<20}".format(self.device.current_screen[0:14], str(self.sender),
                                                                    self.message,
                                                                    self.device.current_screen[60:])
             print(self.device.next_screen)
