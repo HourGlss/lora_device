@@ -321,15 +321,11 @@ class SendMenu(AbstractState):
 
     def on_enter(self):
         if self.device.cursor_row == 1:
-            # checks if the input buffer is empty and if so passes
             if self.device.input_buffer != "":
-                # transitions to the compose_menu state
                 self.nextState = ComposeMenu(self.device)
-                # sets the data_to_send address
                 self.device.data_to_send["address"] = self.addr_to_use
 
         if self.device.cursor_row == 3:
-            # transitions to the main_menu state
             self.nextState = MainMenu(self.device)
 
     def on_up(self):
