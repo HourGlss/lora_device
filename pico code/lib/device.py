@@ -2,6 +2,7 @@ import board
 from digitalio import DigitalInOut, Direction, Pull
 from lcd.lcd import CursorMode
 
+
 class Messages(object):
 
     def __init__(self):
@@ -15,7 +16,7 @@ class Messages(object):
 
 
 class Device(object):
-    def __init__(self, lcd_to_use, lora_to_use):
+    def __init__(self, lcd_to_use, lora_to_use, testled=None):
         self.__lcd = lcd_to_use
         self.lcd_height = lcd_to_use.num_rows
         self.lcd_width = lcd_to_use.num_cols
@@ -37,6 +38,11 @@ class Device(object):
         self.kb_cols = None
         self.kb_rows = None
         self.pins = None
+
+        if testled is not None:
+            self.test_led = testled
+        else:
+            self.test_led = None
 
         self.lcd_event_change_detected = False
 
@@ -87,7 +93,6 @@ class Device(object):
             "backspace": False,
         }
 
-
     def get_keyboard_input(self):
 
         all_possible = self.__build_all_possible()
@@ -98,7 +103,8 @@ class Device(object):
         ]
 
         c = 0
-
+        if self.test_led is not None:
+            self.test_led.value = True
         for cpin in self.kb_cols:
             r = 0
             cpin.value = True
@@ -108,6 +114,8 @@ class Device(object):
                 r += 1
             c += 1
             cpin.value = False
+        if self.test_led is not None:
+            self.test_led.value = False
 
         if self.__last_keyboard != all_possible:
             self.__last_keyboard = all_possible

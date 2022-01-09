@@ -37,7 +37,7 @@ class ReceivedMessage(object):
 class RYLR896:
     __debug = None
 
-    def __init__(self, tx=None, rx=None, timeout=.5, debug=False, name=None, repeater=False):
+    def __init__(self, tx=None, rx=None, debug=False, name=None, repeater=False):
         if name is None:
             self.name = self.__class__.__name__
         else:
@@ -45,9 +45,7 @@ class RYLR896:
         self.__debug = debug
         assert rx is not None and tx is not None
         self.check = False
-        self.timeout = timeout
-        self.set_device_timeout()
-        self.uart = busio.UART(rx=rx, tx=tx, baudrate=115200, receiver_buffer_size=2048, timeout=timeout)
+        self.uart = busio.UART(rx=rx, tx=tx, baudrate=115200, receiver_buffer_size=2048,timeout=.005)
         if self.test_device():
             self.factory_reset()
             print("{} is factory reset and ready to use".format(self.name))
@@ -66,9 +64,6 @@ class RYLR896:
             print("Failed to establish communication with {}".format(self.name))
             self.check = False
 
-    def set_device_timeout(self, timeout_to_use: float = .5):
-        self.timeout = timeout_to_use
-
     def cmd(self, lora_cmd):
         self.uart.reset_input_buffer()
         self.uart.write(bytes(lora_cmd, "utf-8"))
@@ -79,9 +74,6 @@ class RYLR896:
             data = self.uart.read()
             if data is not None:
                 print("cmd breaking due to data not None {}".format(data))
-                break
-            if now - start > self.timeout:
-                print("cmd breaking due to timeout")
                 break
         try:
             if data is not None:
@@ -98,25 +90,22 @@ class RYLR896:
 
     def read_from_device(self):
         data = None
-        start = time.time()
-        while True:
-            now = time.time()
-            data = self.uart.read()
-            if data is not None:
-                break
-            if now - start > self.timeout:
-                break
+        data = self.uart.read()
+        if data is None:
+            return None
         try:
             data = data.decode().replace("\r\n", "")
-            if "+RCV" in data:
-                address, payload_length, data, rssi, snr = data[len("+RCV="):].split(',')
-                msg = ReceivedMessage(address=address, payload_length=payload_length, actual_data=data,
-                                      received_signal_strength_indicator=rssi, signal_noise_ratio=snr)
-                return msg.get_dictionary()
-            else:
-                print("read_from_device SOMETHING WENT WRONG")
         except:
-            return data
+            print(data)
+        if "+RCV" in data:
+            address, payload_length, data, rssi, snr = data[len("+RCV="):].split(',')
+            msg = ReceivedMessage(address=address, payload_length=payload_length, actual_data=data,
+                                  received_signal_strength_indicator=rssi, signal_noise_ratio=snr)
+            return msg.get_dictionary()
+        else:
+            print("read_from_device something we haven't seen")
+
+
 
     def set_address(self, address_to_use: int) -> bool:
         """
@@ -406,7 +395,7 @@ class RYLR896:
         self.uart.reset_input_buffer()
         self.uart.write(bytes(cmd_to_use, "utf-8"))
         self.uart.write(b"\x0d\x0a")
-        time.sleep(self.timeout)
+        # time.sleep(self.timeout)
         data = None
         start = time.time()
         while True:

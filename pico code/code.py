@@ -2,6 +2,9 @@ from states import MainMenu, SendMenu
 from device import Device
 import busio
 import board
+import time
+
+from digitalio import DigitalInOut, Direction
 
 from lcd.lcd import LCD
 from lcd.i2c_pcf8574_interface import I2CPCF8574Interface
@@ -15,8 +18,8 @@ class Driver(object):
     def main(self):
         lcd_i2c = busio.I2C(scl=board.GP1, sda=board.GP0)
         lcd = LCD(I2CPCF8574Interface(lcd_i2c, 0x27), num_rows=4, num_cols=20)
-        lcd.set_backlight(False)
-        lora = RYLR896(rx=board.GP5,tx=board.GP4,name="lora",debug=False,timeout=.05)
+        lcd.set_backlight(True)
+        lora = RYLR896(rx=board.GP5, tx=board.GP4, name="lora", debug=True)
         d = Device(lcd, lora)
         current_state = MainMenu(d)
         while True:
@@ -41,8 +44,18 @@ class Driver(object):
             if state_change:
                 current_state.initial()
 
+    def test_led_bulb(self):
+        test_led = DigitalInOut(board.GP15)
+        test_led.direction = Direction.OUTPUT
+        while True:
+            print("light on")
+            test_led.value = True
+            time.sleep(1)
+            print("light off")
+            test_led.value = False
+            time.sleep(1)
+
 
 if __name__ == "__main__":
     D = Driver()
     D.main()
-
