@@ -15,6 +15,7 @@ class Driver(object):
     def __init__(self):
         pass
 
+
     def main(self):
         lcd_i2c = busio.I2C(scl=board.GP1, sda=board.GP0)
         lcd = LCD(I2CPCF8574Interface(lcd_i2c, 0x27), num_rows=4, num_cols=20)
