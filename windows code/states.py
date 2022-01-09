@@ -36,7 +36,7 @@ class AbstractState(ABC):
         self.device.toggle_lcd_event_flag()
         if self.device.cursor_row < self.device.lcd_height - 1:
             self.device.next_cursor_row = self.device.cursor_row + 1
-        logging.info("down pressed, cursor position ({},{})".format(self.device.cursor_row, self.device.cursor_col))
+        logging.debug("down pressed, cursor position ({},{})".format(self.device.cursor_row, self.device.cursor_col))
 
     def on_left(self):
         func = inspect.currentframe().f_back.f_code
@@ -55,15 +55,12 @@ class AbstractState(ABC):
             self.device.next_cursor_col = self.device.cursor_col + 1
         logging.debug("right pressed, cursor position ({},{})".format(self.device.cursor_row, self.device.cursor_col))
 
-    @abstractmethod
     def on_enter(self):
         pass
 
-    @abstractmethod
     def write_char(self, c):
         pass
 
-    @abstractmethod
     def delete(self):
         pass
 
@@ -88,7 +85,7 @@ class ComposeMenu(AbstractState):
 
     def initial(self):
         func = inspect.currentframe().f_back.f_code
-        logging.info("intial setup for ComposeMenu")
+        logging.debug("intial setup for ComposeMenu")
         self.device.initial_cursor_row = 0
         self.device.initial_cursor_col = 5
         self.device.next_cursor_row = self.device.initial_cursor_row
@@ -104,15 +101,15 @@ class ComposeMenu(AbstractState):
     def screen(self):
         func = inspect.currentframe().f_back.f_code
         if self.device.input_buffer != self.device.next_input_buffer:
-            logging.info("input buffer is not empty")
-            self.device.next_screen = "{}{:<55}{}".format(self.device.current_screen[0:5], self.device.next_input_buffer,
-                                                         self.device.current_screen[60:])
+            logging.debug("input buffer is not empty")
+            self.device.next_screen = "{}{:<55}{}".format(self.device.current_screen[0:5],
+                                                          self.device.next_input_buffer,
+                                                          self.device.current_screen[60:])
             self.device.input_buffer = self.device.next_input_buffer
 
             logging.debug("Length of next_screen is {}".format(len(self.device.next_screen)))
         else:
             pass
-
 
     def use_keyboard_input(self, kb):
         if kb['enter']:
@@ -143,7 +140,6 @@ class ComposeMenu(AbstractState):
                 self.write_char(k)
                 break
 
-
     def on_enter(self):
         func = inspect.currentframe().f_back.f_code
         # checks if the the cursor is at 3,0
@@ -166,7 +162,7 @@ class ComposeMenu(AbstractState):
 
     def write_char(self, c):
         func = inspect.currentframe().f_back.f_code
-        logging.info("attempting to add {}".format(c))
+        logging.debug("attempting to add {}".format(c))
         """
         Shelved for later
         
@@ -219,12 +215,6 @@ class ComposeMenu(AbstractState):
                 pass
 
 
-    def get_next_state(self):
-        if self.nextState is None:
-            return self
-        else:
-            return self.nextState
-
 class SendingMenu(AbstractState):
 
     def __init__(self, d):
@@ -239,7 +229,7 @@ class SendingMenu(AbstractState):
 
     def initial(self):
         func = inspect.currentframe().f_back.f_code
-        logging.info("intial setup for SendingMessage")
+        logging.debug("intial setup for SendingMessage")
         self.device.initial_cursor_row = 0
         self.device.initial_cursor_col = 0
         self.device.toggle_lcd_event_flag()
@@ -261,26 +251,6 @@ class SendingMenu(AbstractState):
             # if False transitions to the send_failed state
             self.nextState = SendingMenu(self.device)
 
-    def get_next_state(self):
-        if self.nextState is None:
-            return self
-        else:
-            return self.nextState
-
-    def use_keyboard_input(self, kb):
-        pass
-
-    def screen(self):
-        pass
-
-    def on_enter(self):
-        pass
-
-    def write_char(self, c):
-        pass
-
-    def delete(self):
-        pass
 
 class SendSuccessful(AbstractState):
 
@@ -296,7 +266,7 @@ class SendSuccessful(AbstractState):
 
     def initial(self):
         func = inspect.currentframe().f_back.f_code
-        logging.info("intial setup for SendSuccessful")
+        logging.debug("intial setup for SendSuccessful")
         self.device.initial_cursor_row = 0
         self.device.initial_cursor_col = 0
         self.device.toggle_lcd_event_flag()
@@ -317,18 +287,11 @@ class SendSuccessful(AbstractState):
         if kb['enter']:
             self.on_enter()
             return
-    def screen(self):
-        pass
 
     def on_enter(self):
         self.nextState = MainMenu(self.device)
         pass
 
-    def write_char(self, c):
-        pass
-
-    def delete(self):
-        pass
 
 class SettingsMenu(AbstractState):
 
@@ -343,7 +306,7 @@ class SettingsMenu(AbstractState):
 
     def initial(self):
         func = inspect.currentframe().f_back.f_code
-        logging.info(" ")
+        logging.debug(" ")
         self.device.toggle_lcd_event_flag()
         self.device.next_screen = ""
         menu = ("* Set addr (0-65535)", "* Set ntwk (0-16)", "", "M")
@@ -360,9 +323,6 @@ class SettingsMenu(AbstractState):
         if kb['w']:
             self.on_up()
             return
-
-    def screen(self):
-        pass
 
     def on_enter(self):
         func = inspect.currentframe().f_back.f_code
@@ -411,6 +371,7 @@ class SettingsMenu(AbstractState):
         else:
             return self.nextState
 
+
 class SetAddress(AbstractState):
 
     def __init__(self, d):
@@ -430,7 +391,7 @@ class SetAddress(AbstractState):
 
     def initial(self):
         func = inspect.currentframe().f_back.f_code
-        logging.info(" ")
+        logging.debug(" ")
         self.device.next_cursor_row = 1
         self.device.next_cursor_col = 0
         self.device.toggle_lcd_event_flag()
@@ -468,11 +429,12 @@ class SetAddress(AbstractState):
         logging.debug("device.current_screen {}".format(self.device.current_screen))
         logging.debug("device.next_screen {}".format(self.device.next_screen))
         if self.device.input_buffer != self.device.next_input_buffer:
-            logging.info("input buffer is not empty")
-            self.device.next_screen = "{}{:<5}{}".format(self.device.current_screen[0:20], self.device.next_input_buffer,
+            logging.debug("input buffer is not empty")
+            self.device.next_screen = "{}{:<5}{}".format(self.device.current_screen[0:20],
+                                                         self.device.next_input_buffer,
                                                          self.device.current_screen[25:])
             print(self.device.next_screen)
-            logging.info("setting next_screen to {}".format(self.device.next_screen))
+            logging.debug("setting next_screen to {}".format(self.device.next_screen))
             self.device.input_buffer = self.device.next_input_buffer
         logging.debug("Length of next_screen is {}".format(len(self.device.next_screen)))
 
@@ -485,26 +447,26 @@ class SetAddress(AbstractState):
             self.nextState = MainMenu(self.device)
             # saves the address to the data_to_send
             self.device.data_to_send["address_to_use"] = int(self.device.input_buffer)
-            logging.info(self.device.data_to_send)
+            logging.debug(self.device.data_to_send)
             self.device.data_to_send = {}
 
     def write_char(self, c):
         func = inspect.currentframe().f_back.f_code
-        logging.info("attemping to add {}".format(c))
+        logging.debug("attemping to add {}".format(c))
         addr = None
         if c in [str(e) for e in range(0, 10)]:
-            logging.info("yea its a number")
+            logging.debug("yea its a number")
             self.device.next_input_buffer += c
             try:
                 addr = int(self.device.next_input_buffer)
-                logging.info("addr seems valid")
+                logging.debug("addr seems valid")
                 if addr > 65535:
                     raise ValueError
                 self.device.next_cursor_col = self.device.cursor_col + 1
                 self.device.toggle_lcd_event_flag()
-                logging.info("nextscreen set")
+                logging.debug("nextscreen set")
             except:
-                logging.info("wasnt valid")
+                logging.debug("wasnt valid")
                 self.device.next_input_buffer = self.device.next_input_buffer[:-1]
         if addr is not None:
             self.addr_to_use = addr
@@ -525,7 +487,6 @@ class SetAddress(AbstractState):
             else:
                 self.device.next_cursor_col = 0
 
-
     def on_down(self):
         func = inspect.currentframe().f_back.f_code
         self.device.toggle_lcd_event_flag()
@@ -536,6 +497,7 @@ class SetAddress(AbstractState):
             else:
                 self.device.next_cursor_col = 0
         logging.debug("down pressed, cursor position ({},{})".format(self.device.cursor_row, self.device.cursor_col))
+
 
 class SetNetworkid(AbstractState):
 
@@ -550,7 +512,7 @@ class SetNetworkid(AbstractState):
 
     def initial(self):
         func = inspect.currentframe().f_back.f_code
-        logging.info(" ")
+        logging.debug(" ")
         self.device.next_cursor_row = 1
         self.device.next_cursor_col = 0
         self.device.toggle_lcd_event_flag()
@@ -594,12 +556,12 @@ class SetNetworkid(AbstractState):
         logging.debug("device.current_screen {}".format(self.device.current_screen))
         logging.debug("device.next_screen {}".format(self.device.next_screen))
         if self.device.input_buffer != self.device.next_input_buffer:
-            logging.info("input buffer is not empty")
+            logging.debug("input buffer is not empty")
             self.device.next_screen = "{}{:<2}{}".format(self.device.current_screen[0:20],
                                                          self.device.next_input_buffer,
                                                          self.device.current_screen[22:])
             print(self.device.next_screen)
-            logging.info("setting next_screen to {}".format(self.device.next_screen))
+            logging.debug("setting next_screen to {}".format(self.device.next_screen))
             self.device.input_buffer = self.device.next_input_buffer
         logging.debug("Length of next_screen is {}".format(len(self.device.next_screen)))
 
@@ -612,26 +574,26 @@ class SetNetworkid(AbstractState):
             self.nextState = MainMenu(self.device)
             # saves the address to the data_to_send
             self.device.data_to_send["networkid_to_use"] = int(self.device.input_buffer)
-            logging.info(self.device.data_to_send)
+            logging.debug(self.device.data_to_send)
             self.device.data_to_send = {}
 
     def write_char(self, c):
         func = inspect.currentframe().f_back.f_code
-        logging.info("attemping to add {}".format(c))
+        logging.debug("attemping to add {}".format(c))
         addr = None
         if c in [str(e) for e in range(0, 10)]:
-            logging.info("yea its a number")
+            logging.debug("yea its a number")
             self.device.next_input_buffer += c
             try:
                 addr = int(self.device.next_input_buffer)
-                logging.info("networkid seems valid")
+                logging.debug("networkid seems valid")
                 if addr > 16:
                     raise ValueError
                 self.device.next_cursor_col = self.device.cursor_col + 1
                 self.device.toggle_lcd_event_flag()
-                logging.info("nextscreen set")
+                logging.debug("nextscreen set")
             except:
-                logging.info("wasnt valid")
+                logging.debug("wasnt valid")
                 self.device.next_input_buffer = self.device.next_input_buffer[:-1]
         if addr is not None:
             self.addr_to_use = addr
@@ -664,7 +626,6 @@ class SetNetworkid(AbstractState):
         logging.debug("down pressed, cursor position ({},{})".format(self.device.cursor_row, self.device.cursor_col))
 
 
-
 class ReceivedMenu(AbstractState):
 
     def __init__(self, d):
@@ -672,31 +633,91 @@ class ReceivedMenu(AbstractState):
         super().__init__(d)
         logging.debug(" ")
         self.addr_to_use = None
+        self.last_sender = None
+        self.sender = None
+        self.message = ""
+        self.current_message = 0
         self.device.next_cursor_row = 0
         self.device.next_cursor_col = 0
         self.device.function_toggle = False
-        self.device.toggle_lcd_event_flag()
-        logging.debug("creating SendMenu")
+        logging.info("input_buffer {}".format(self.device.input_buffer))
+        logging.info("next_input_buffer".format(self.device.next_input_buffer))
+        logging.info("next screen ".format(self.device.next_screen))
 
-    def get_next_state(self):
-        pass
+        logging.info("end init")
+
+    def initial(self):
+        func = inspect.currentframe().f_back.f_code
+        logging.debug(" ")
+        self.device.initial_cursor_row = 3
+        self.device.initial_cursor_col = 0
+        self.device.next_cursor_row = self.device.initial_cursor_row
+        self.device.next_cursor_col = self.device.initial_cursor_col
+        self.device.toggle_lcd_event_flag()
+        self.device.input_buffer = ""
+        self.device.next_input_buffer = ""
+        menu = ("Message from:", "", "", "M")
+        self.device.next_screen = ""
+        for item in menu:
+            self.device.next_screen += "{:<20}".format(item)
+
+    def screen(self):
+        func = inspect.currentframe().f_back.f_code
+        logging.info("changing device.next_screen")
+        logging.info("device.current_screen {}".format(self.device.current_screen))
+        logging.info("device.next_screen {}".format(self.device.next_screen))
+        if self.sender != self.last_sender:
+            logging.info("input buffer is not empty")
+            self.device.next_screen = "{}{:<5}{:<40}{:<20}".format(self.device.current_screen[0:15], str(self.sender),
+                                                                   self.message,
+                                                                   self.device.current_screen[60:])
+            print(self.device.next_screen)
+            logging.info("setting next_screen to {}".format(self.device.next_screen))
+            self.device.last_sender = self.sender
+        logging.info("Length of next_screen is {}".format(len(self.device.next_screen)))
 
     def use_keyboard_input(self, kb):
+        func = inspect.currentframe().f_back.f_code
+        logging.info("keyboard used {}".format(kb))
         if kb['s']:
-            self.on_down()
+            self.next_message()
             return
         if kb['w']:
-            self.on_up()
+            self.last_message()
             return
         if kb['enter']:
             self.on_enter()
             return
 
-    def screen(self):
-        pass
-
     def on_enter(self):
-        pass
+        func = inspect.currentframe().f_back.f_code
+        logging.info("enter pressed")
+        if self.device.next_cursor_row == 3:
+            # transitions to the main_menu state
+            self.nextState = MainMenu(self.device)
+        logging.info("end enter")
+
+    def next_message(self):
+        func = inspect.currentframe().f_back.f_code
+        logging.info(" ")
+        self.device.toggle_lcd_event_flag()
+        if self.current_message < len(self.device.messages)-1:
+            self.current_message += 1
+            logging.info("Current message is: {}".format(self.current_message))
+        self.sender = self.device.messages[self.current_message]['address']
+        self.message = self.device.messages[self.current_message]['data']
+        logging.info("end next_message")
+
+    def last_message(self):
+        func = inspect.currentframe().f_back.f_code
+        logging.info(" ")
+        self.device.toggle_lcd_event_flag()
+        if self.current_message > 0:
+            self.current_message -= 1
+            logging.info("Current message is: {}".format(self.current_message))
+        self.sender = self.device.messages[self.current_message]['address']
+        self.message = self.device.messages[self.current_message]['data']
+        logging.info("last message")
 
     def write_char(self, c):
         pass
@@ -718,10 +739,9 @@ class SendMenu(AbstractState):
         self.device.toggle_lcd_event_flag()
         logging.debug("creating SendMenu")
 
-
     def initial(self):
         func = inspect.currentframe().f_back.f_code
-        logging.info(" ")
+        logging.debug(" ")
         self.device.initial_cursor_row = 0
         self.device.initial_cursor_col = 3
         self.device.next_cursor_row = self.device.initial_cursor_row
@@ -740,11 +760,11 @@ class SendMenu(AbstractState):
         logging.debug("device.current_screen {}".format(self.device.current_screen))
         logging.debug("device.next_screen {}".format(self.device.next_screen))
         if self.device.input_buffer != self.device.next_input_buffer:
-            logging.info("input buffer is not empty")
+            logging.debug("input buffer is not empty")
             self.device.next_screen = "{}{:<5}{}".format(self.device.current_screen[0:3], self.device.next_input_buffer,
                                                          self.device.current_screen[8:])
             print(self.device.next_screen)
-            logging.info("setting next_screen to {}".format(self.device.next_screen))
+            logging.debug("setting next_screen to {}".format(self.device.next_screen))
             self.device.input_buffer = self.device.next_input_buffer
         logging.debug("Length of next_screen is {}".format(len(self.device.next_screen)))
 
@@ -821,21 +841,21 @@ class SendMenu(AbstractState):
     def write_char(self, c):
         func = inspect.currentframe().f_back.f_code
 
-        logging.info("attemping to add {}".format(c))
+        logging.debug("attemping to add {}".format(c))
         addr = None
         if c in [str(e) for e in range(0, 10)]:
-            logging.info("yea its a number")
+            logging.debug("yea its a number")
             self.device.next_input_buffer += c
             try:
                 addr = int(self.device.next_input_buffer)
-                logging.info("addr seems valid")
+                logging.debug("addr seems valid")
                 if addr > 65535:
                     raise ValueError
                 self.device.next_cursor_col = self.device.cursor_col + 1
                 self.device.toggle_lcd_event_flag()
-                logging.info("nextscreen set")
+                logging.debug("nextscreen set")
             except:
-                logging.info("wasnt valid")
+                logging.debug("wasnt valid")
                 self.device.next_input_buffer = self.device.next_input_buffer[:-1]
         if addr is not None:
             self.addr_to_use = addr
