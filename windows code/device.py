@@ -14,6 +14,9 @@ class Messages(object):
         if len(self.messages) > self.max_messages:
             self.messages.pop(0)
 
+    def __getitem__(self, item):
+        return self.messages[item]
+
     def __len__(self):
         return len(self.messages)
 
