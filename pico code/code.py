@@ -15,7 +15,7 @@ class Driver(object):
     def main(self):
         lcd_i2c = busio.I2C(scl=board.GP1, sda=board.GP0)
         lcd = LCD(I2CPCF8574Interface(lcd_i2c, 0x27), num_rows=4, num_cols=20)
-        lcd.set_backlight(True)
+        lcd.set_backlight(False)
         lora = RYLR896(rx=board.GP5,tx=board.GP4,name="lora",debug=False,timeout=.05)
         d = Device(lcd, lora)
         current_state = MainMenu(d)

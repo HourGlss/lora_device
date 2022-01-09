@@ -174,7 +174,10 @@ class Device(object):
             self.cursor_row = self.next_cursor_row
             self.cursor_col = self.next_cursor_col
         self.__lcd.set_cursor_pos(self.cursor_row, self.cursor_col)
-        self.__lcd.draw_cursor()
+        if self.function_toggle:
+            self.__lcd.draw_cursor("blink")
+        else:
+            self.__lcd.draw_cursor("line")
         self.toggle_lcd_event_flag()
 
     def get_message(self):

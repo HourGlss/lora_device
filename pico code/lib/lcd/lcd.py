@@ -171,8 +171,13 @@ class LCD(object):
         """The cursor position as a 2-tuple (row, col)."""
         return (self._row, self._col)
 
-    def draw_cursor(self):
-        self.set_cursor_mode(CursorMode.LINE)
+    def draw_cursor(self,cursor_type):
+        if cursor_type == "line":
+            self.set_cursor_mode(CursorMode.LINE)
+        elif cursor_type == "blink":
+            self.set_cursor_mode(CursorMode.BLINK)
+        else:
+            raise "you fuckin idiot"
 
     def set_cursor_pos(self, row, col):
         if not (0 <= row < self.num_rows):
