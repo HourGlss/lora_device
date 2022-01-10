@@ -69,10 +69,11 @@ class Device(object):
         self.input_buffer = ""
         self.next_input_buffer = ""
         if kbscl is not None and kbsda is not None:
+            print("using i2c keyboard")
             self.use_i2c_kb = True
-            self.setup_i2c_keyboard(scl=kbscl, sda=kbsda)
             self.kb_i2c = None
             self.cardkb = None
+            self.setup_i2c_keyboard(scl=kbscl, sda=kbsda)
         else:
             self.use_i2c_kb = False
             self.setup_keyboard()
@@ -253,6 +254,7 @@ class Device(object):
     def get_message(self):
         data_in = self.lora.read_from_device()
         if data_in is not None:
+            print("getting new message")
             self.messages.add(data_in)
 
 

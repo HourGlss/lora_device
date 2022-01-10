@@ -20,6 +20,9 @@ class Driver(object):
         lcd = LCD(I2CPCF8574Interface(lcd_i2c, 0x27), num_rows=4, num_cols=20)
         lcd.set_backlight(True)
         lora = RYLR896(rx=board.GP5, tx=board.GP4, name="lora", debug=True)
+        lora.set_address(5)
+        lora.set_network_id(5)
+        lora.set_rf_parameters(10,7,1,7)
         d = Device(lcd, lora, kbsda=board.GP18, kbscl=board.GP19)
         current_state = MainMenu(d)
         while True:

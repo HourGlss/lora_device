@@ -101,6 +101,7 @@ class RYLR896:
             address, payload_length, data, rssi, snr = data[len("+RCV="):].split(',')
             msg = ReceivedMessage(address=address, payload_length=payload_length, actual_data=data,
                                   received_signal_strength_indicator=rssi, signal_noise_ratio=snr)
+            print(msg)
             return msg.get_dictionary()
         else:
             print("read_from_device something we haven't seen")
