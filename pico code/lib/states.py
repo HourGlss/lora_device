@@ -483,18 +483,39 @@ class ReceivedMenu(AbstractState):
             self.device.next_screen += "{:<20}".format(item)
 
     def screen(self):
-        if self.sender != self.last_sender:
-            self.device.next_screen = "{}{:<6}{:<40}{:<20}".format(self.device.current_screen[0:14], str(self.sender),
-                                                                   self.message,
-                                                                   self.device.current_screen[60:])
-            self.device.last_sender = self.sender
+
+        if self.device.messages.last_message() is None:
+            last_message = " "
+        else:
+            last_message = "L"
+
+        if self.device.messages.next_message() is None:
+            next_message = " "
+        else:
+            next_message = "N"
+
+        if self.device.messages.current_message() is not None:
+            address = str(self.device.messages.current_message()["address"])
+            data = self.device.messages.current_message()["data"]
+
+
+            # there is a current_message to draw
+            self.device.next_screen = "{}{:<6}{:<40}{:<2} {} {}{}".format(self.device.current_screen[0:14], address,
+                                                               data, self.device.current_screen[60:62], last_message,
+                                                                      next_message,self.device.current_screen[66:])
+
 
     def use_keyboard_input(self, kb):
-        if kb['s']:
-            self.next_message()
-            return
-        if kb['w']:
-            self.last_message()
+        if kb['d']:
+            if self.device.messages.next_message() is not None:
+                # allow them to press the button
+                self.device.messages.index += 1
+                self.device.toggle_lcd_event_flag()
+                return
+        if kb['a']:
+            if self.device.messages.last_message() is not None:
+                self.device.messages.index -= 1
+                self.device.toggle_lcd_event_flag()
             return
         if kb['enter']:
             self.on_enter()
@@ -503,20 +524,6 @@ class ReceivedMenu(AbstractState):
     def on_enter(self):
         if self.device.next_cursor_row == 3:
             self.nextState = MainMenu(self.device)
-
-    def next_message(self):
-        self.device.toggle_lcd_event_flag()
-        if self.current_message < len(self.device.messages) - 1:
-            self.current_message += 1
-        self.sender = self.device.messages[self.current_message]['address']
-        self.message = self.device.messages[self.current_message]['data']
-
-    def last_message(self):
-        self.device.toggle_lcd_event_flag()
-        if self.current_message > 0:
-            self.current_message -= 1
-        self.sender = self.device.messages[self.current_message]['address']
-        self.message = self.device.messages[self.current_message]['data']
 
 
 class SendMenu(AbstractState):
