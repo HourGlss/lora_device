@@ -86,6 +86,7 @@ class ComposeMenu(AbstractState):
             return
         if kb['right shift']:
             self.device.function_toggle = not self.device.function_toggle
+            self.device.toggle_lcd_event_flag()
             return
         if self.device.function_toggle:
             if kb['s']:
@@ -284,6 +285,7 @@ class SetAddress(AbstractState):
             return
         if kb['right shift']:
             self.device.function_toggle = not self.device.function_toggle
+            self.device.toggle_lcd_event_flag()
             return
         if self.device.function_toggle:
             if kb['s']:
@@ -385,6 +387,8 @@ class SetNetworkid(AbstractState):
             return
         if kb['right shift']:
             self.device.function_toggle = not self.device.function_toggle
+            self.device.toggle_lcd_event_flag()
+
             return
         if self.device.function_toggle:
             if kb['s']:
@@ -554,6 +558,8 @@ class SendMenu(AbstractState):
             return
         if kb['right shift']:
             self.device.function_toggle = not self.device.function_toggle
+            self.device.toggle_lcd_event_flag()
+
             return
         if self.device.function_toggle:
             if kb['s']:
