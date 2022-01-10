@@ -119,7 +119,12 @@ class ComposeMenu(AbstractState):
         elif self.device.cursor_row == 0 and self.device.cursor_col <= 5:
             if self.device.input_buffer is not None:
                 self.nextState = SendingMenu(self.device)
-                self.device.data_to_send["data"] = str(self.device.next_input_buffer)
+                temp = str(self.device.next_input_buffer)
+                temp = temp.strip()
+                temp = temp.replace("\r\n","")
+                temp = temp.replace("\n","")
+                self.device.data_to_send["data"] = temp
+                del temp
 
     def write_char(self, c):
         if c == 'space':
@@ -460,11 +465,6 @@ class ReceivedMenu(AbstractState):
 
     def __init__(self, d):
         super().__init__(d)
-        self.addr_to_use = None
-        self.last_sender = None
-        self.sender = None
-        self.message = ""
-        self.current_message = 0
         self.device.next_cursor_row = 0
         self.device.next_cursor_col = 0
         self.device.function_toggle = False

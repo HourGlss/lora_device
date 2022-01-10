@@ -15,20 +15,22 @@ class Driver(object):
     def __init__(self):
         pass
 
-
     def main(self):
         lcd_i2c = busio.I2C(scl=board.GP1, sda=board.GP0)
         lcd = LCD(I2CPCF8574Interface(lcd_i2c, 0x27), num_rows=4, num_cols=20)
         lcd.set_backlight(True)
         lora = RYLR896(rx=board.GP5, tx=board.GP4, name="lora", debug=True)
-        d = Device(lcd, lora)
+        d = Device(lcd, lora, kbsda=board.GP18, kbscl=board.GP19)
         current_state = MainMenu(d)
         while True:
             state_change = False
             # check lora to see if received
             d.get_message()
             # get keyboard input
-            kbi = d.get_keyboard_input()
+            if d.use_i2c_kb:
+                kbi = d.get_i2c_keyboard_input()
+            else:
+                kbi = d.get_keyboard_input()
             if kbi is not None:
                 current_state.use_keyboard_input(kbi)
             # check state

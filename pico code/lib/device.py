@@ -9,6 +9,7 @@ class Messages(object):
     def __init__(self):
         self.max_messages = 10
         self.messages = []
+        self.index = 0
 
     def add(self, d: dict):
         self.messages.append(d)
@@ -40,7 +41,7 @@ class Messages(object):
 
 
 class Device(object):
-    def __init__(self, lcd_to_use, lora_to_use, testled=None):
+    def __init__(self, lcd_to_use, lora_to_use, testled=None, kbsda=None, kbscl=None):
         self.__lcd = lcd_to_use
         self.lcd_height = lcd_to_use.num_rows
         self.lcd_width = lcd_to_use.num_cols
@@ -58,11 +59,6 @@ class Device(object):
         self.next_cursor_row = 0
         self.next_cursor_col = 0
         self.data_to_send = dict()
-
-        self.kb_cols = None
-        self.kb_rows = None
-        self.pins = None
-
         if testled is not None:
             self.test_led = testled
         else:
