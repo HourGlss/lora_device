@@ -1,23 +1,37 @@
-import time
-
-led = False
+test = ['a', 'b', 'c']
 
 
-def toggle_led(val: bool) -> None:
-    global led
-    led = val
-    print(f"led is now {val}")
+def current_message():
+    global index, test
+    if index < 0:
+        return None
+    try:
+        return test[index]
+    except:
+        return None
 
 
-toggle_for = 1
-start = None
-led_last_off = 0
-while True:
-    now = time.time()
-    if not led and now - led_last_off > toggle_for:
-        toggle_led(True)
-        start = time.time()
+def next_message():
+    global index, test
+    if index + 1 < 0:
+        return None
+    try:
+        return test[index+1]
+    except:
+        return None
 
-    if led and now - start > toggle_for:
-        toggle_led(False)
-        led_last_off = now
+
+def last_message():
+    global index, test
+
+    if index - 1 < 0:
+        return None
+    try:
+        return test[index-1]
+    except:
+        return None
+
+index = 3
+print(last_message())
+print(current_message())
+print(next_message())
