@@ -19,10 +19,8 @@ class Driver(object):
         lcd_i2c = busio.I2C(scl=board.GP1, sda=board.GP0)
         lcd = LCD(I2CPCF8574Interface(lcd_i2c, 0x27), num_rows=4, num_cols=20)
         lcd.set_backlight(True)
-        lora = RYLR896(rx=board.GP5, tx=board.GP4, name="lora", debug=True)
-        lora.set_address(5)
-        lora.set_network_id(5)
-        lora.set_rf_parameters(10,7,1,7)
+        lora = RYLR896(rx=board.GP5, tx=board.GP4, name="lora")
+        lora.lazy_config(address=5, network_id=5, parameters=(10, 7, 1, 7))
         d = Device(lcd, lora, kbsda=board.GP18, kbscl=board.GP19)
         current_state = MainMenu(d)
         while True:
@@ -54,7 +52,6 @@ class Driver(object):
         test_led = DigitalInOut(board.GP15)
         test_led.direction = Direction.OUTPUT
         while True:
-            print("light on")
             test_led.value = True
             time.sleep(1)
             print("light off")

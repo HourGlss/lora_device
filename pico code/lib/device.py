@@ -69,7 +69,6 @@ class Device(object):
         self.input_buffer = ""
         self.next_input_buffer = ""
         if kbscl is not None and kbsda is not None:
-            print("using i2c keyboard")
             self.use_i2c_kb = True
             self.kb_i2c = None
             self.cardkb = None
@@ -211,6 +210,7 @@ class Device(object):
         self.cardkb = self.kb_i2c.scan()[0]
 
     def toggle_lcd_event_flag(self):
+        print("lcd event flag toggled")
         self.lcd_event_change_detected = not self.lcd_event_change_detected
 
     def print_screen(self):
@@ -254,7 +254,6 @@ class Device(object):
     def get_message(self):
         data_in = self.lora.read_from_device()
         if data_in is not None:
-            print("getting new message")
             self.messages.add(data_in)
 
 

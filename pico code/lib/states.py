@@ -55,12 +55,14 @@ class ComposeMenu(AbstractState):
 
     def __init__(self, d):
         super().__init__(d)
+        print("Comp init called")
         self.device.next_cursor_row = 0
         self.device.next_cursor_col = 5
         self.device.function_toggle = False
         self.device.toggle_lcd_event_flag()
 
     def initial(self):
+        print("comp initial called")
         self.device.initial_cursor_row = 0
         self.device.initial_cursor_col = 5
         self.device.next_cursor_row = self.device.initial_cursor_row
@@ -75,10 +77,16 @@ class ComposeMenu(AbstractState):
 
     def screen(self):
         if self.device.input_buffer != self.device.next_input_buffer:
-            self.device.next_screen = "{}{:<55}{}".format(self.device.current_screen[0:5],
+            print("Compose typed a char")
+            self.device.next_screen = "{}{:<55}{}".format(self.device.next_screen[0:5],
                                                           self.device.next_input_buffer,
-                                                          self.device.current_screen[60:])
+                                                          self.device.next_screen[60:])
             self.device.input_buffer = self.device.next_input_buffer
+        if self.device.next_input_buffer == "":
+            self.device.next_screen = ""
+            menu = ("Send:", "", "", "M B")
+            for item in menu:
+                self.device.next_screen += "{:<20}".format(item)
 
     def use_keyboard_input(self, kb):
         if kb['enter']:
@@ -274,6 +282,7 @@ class SetAddress(AbstractState):
         self.device.toggle_lcd_event_flag()
         self.device.input_buffer = ""
         self.device.next_input_buffer = ""
+        self.addr_to_use = None
 
     def initial(self):
         self.device.next_cursor_row = 1
@@ -313,17 +322,13 @@ class SetAddress(AbstractState):
             self.device.next_screen = "{}{:<5}{}".format(self.device.current_screen[0:20],
                                                          self.device.next_input_buffer,
                                                          self.device.current_screen[25:])
-            print(self.device.next_screen)
             self.device.input_buffer = self.device.next_input_buffer
 
     def on_enter(self):
         # checks if the the cursor is at 0,0
         if self.device.next_cursor_row == 2 and self.device.next_cursor_col <= 5:
-            # transitions to the main_menu state
             self.nextState = MainMenu(self.device)
-            # saves the address to the data_to_send
-            self.device.data_to_send["address_to_use"] = int(self.device.input_buffer)
-            self.device.data_to_send = {}
+            self.device.lora.set_address(self.addr_to_use)
 
     def write_char(self, c):
         addr = None
@@ -376,6 +381,7 @@ class SetNetworkid(AbstractState):
         self.device.toggle_lcd_event_flag()
         self.device.input_buffer = ""
         self.device.next_input_buffer = ""
+        self.addr_to_use = None
 
     def initial(self):
         self.device.next_cursor_row = 1
@@ -421,8 +427,7 @@ class SetNetworkid(AbstractState):
     def on_enter(self):
         if self.device.next_cursor_row == 2 and self.device.next_cursor_col <= 5:
             self.nextState = MainMenu(self.device)
-            self.device.data_to_send["networkid_to_use"] = int(self.device.input_buffer)
-            self.device.data_to_send = {}
+            self.device.lora.set_network_id(self.addr_to_use)
 
     def write_char(self, c):
         addr = None
@@ -472,6 +477,7 @@ class ReceivedMenu(AbstractState):
         self.device.next_cursor_row = 0
         self.device.next_cursor_col = 0
         self.device.function_toggle = False
+        self.device.toggle_lcd_event_flag()
 
     def initial(self):
         self.device.initial_cursor_row = 3
@@ -531,6 +537,7 @@ class SendMenu(AbstractState):
 
     def __init__(self, d):
         super().__init__(d)
+        print("States init called")
         self.addr_to_use = None
         self.device.next_cursor_row = 0
         self.device.next_cursor_col = 0
@@ -538,6 +545,7 @@ class SendMenu(AbstractState):
         self.device.toggle_lcd_event_flag()
 
     def initial(self):
+        print("States initial called")
         self.device.initial_cursor_row = 0
         self.device.initial_cursor_col = 3
         self.device.next_cursor_row = self.device.initial_cursor_row

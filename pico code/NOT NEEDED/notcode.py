@@ -54,7 +54,6 @@ for i in range(0, len(to_print) + 80, 80):
 
 lcd.set_backlight(False)
 reset_lcd(lcd)
-print("Setting up")
 txpin = board.GP4
 rxpin = board.GP5
 lora = RYLR896(name="lora", rx=rxpin, tx=txpin, timeout=1, debug=True)
@@ -64,7 +63,6 @@ rxpin2 = board.GP13
 lorb = RYLR896(name="lorb", rx=rxpin2, tx=txpin2, timeout=1, debug=True)
 lorb.set_address(13)
 time.sleep(1)
-print("Sending")
 lora.send(data="Hello world!", address=13)
 time.sleep(1)
 data = None
@@ -78,7 +76,6 @@ reset_lcd(lcd)
 print(data)
 time.sleep(2)
 reset_lcd(lcd)
-print("Done")
 
 
 from fake_rylr896 import RYLR896

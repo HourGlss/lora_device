@@ -25,12 +25,12 @@ class ReceivedMessage(object):
 
     def get_dictionary(self):
         return {
-            "address":int(self.addr),
-            "length":int(self.pl),
-            "data":self.dat,
-            "rssi":int(self.rssi),
-            "snr":int(self.snr),
-            "hash":self.msg_hash
+            "address": int(self.addr),
+            "length": int(self.pl),
+            "data": self.dat,
+            "rssi": int(self.rssi),
+            "snr": int(self.snr),
+            "hash": self.msg_hash
         }
 
 
@@ -45,7 +45,7 @@ class RYLR896:
         self.__debug = debug
         assert rx is not None and tx is not None
         self.check = False
-        self.uart = busio.UART(rx=rx, tx=tx, baudrate=115200, receiver_buffer_size=2048,timeout=.005)
+        self.uart = busio.UART(rx=rx, tx=tx, baudrate=115200, receiver_buffer_size=2048, timeout=.005)
         if self.test_device():
             self.factory_reset()
             print("{} is factory reset and ready to use".format(self.name))
@@ -68,16 +68,9 @@ class RYLR896:
         self.uart.reset_input_buffer()
         self.uart.write(bytes(lora_cmd, "utf-8"))
         self.uart.write(b"\x0d\x0a")
-        start = time.time()
-        while True:
-            now = time.time()
-            data = self.uart.read()
-            if data is not None:
-                print("cmd breaking due to data not None {}".format(data))
-                break
+        data = self.uart.read()
         try:
             if data is not None:
-                # print("data is not None {}".format(data))
                 data = data.decode().replace("\r\n", "")
                 return data
             else:
@@ -87,6 +80,18 @@ class RYLR896:
             print("{} had a failure".format(self.name))
             print(e)
             return None
+
+    def lazy_config(self, address=None, network_id=None, parameters=None):
+        if parameters is not None:
+            assert len(parameters) == 4
+            sf, bw, cr, pp = parameters
+            self.set_rf_parameters(sf, bw, cr, pp)
+        if address is not None:
+            if isinstance(address, int) and 0 < address < 65535:
+                self.set_address(address)
+        if network_id is not None:
+            if isinstance(address, int) and 0 <= address <= 16:
+                self.set_network_id(network_id)
 
     def read_from_device(self):
         data = None
@@ -101,12 +106,9 @@ class RYLR896:
             address, payload_length, data, rssi, snr = data[len("+RCV="):].split(',')
             msg = ReceivedMessage(address=address, payload_length=payload_length, actual_data=data,
                                   received_signal_strength_indicator=rssi, signal_noise_ratio=snr)
-            print(msg)
             return msg.get_dictionary()
         else:
             print("read_from_device something we haven't seen")
-
-
 
     def set_address(self, address_to_use: int) -> bool:
         """
@@ -403,7 +405,7 @@ class RYLR896:
             now = time.time()
             data = self.uart.read()
             if data is not None:
-                print("{} send reply breaking due to data not None {}".format(self.name,data))
+                print("{} send reply breaking due to data not None {}".format(self.name, data))
                 break
             if now - start > 3:
                 if self.__debug:
@@ -411,7 +413,7 @@ class RYLR896:
                 break
         reply = data
         try:
-            reply = reply.decode().replace("\r\n","")
+            reply = reply.decode().replace("\r\n", "")
         except:
             if self.__debug:
                 print("reply cant decode")
@@ -419,7 +421,7 @@ class RYLR896:
         if self.__debug:
             print("{} send reply: {}".format(self.name, reply))
         if reply == "+OK":
-             return True
+            return True
         return False
 
     def get_last_sent(self):
@@ -457,7 +459,7 @@ class RYLR896:
         if self.__debug:
             print("get_UID reply: {}".format(reply))
         if reply.startswith("+UID="):
-            response = reply[len('+UID='):].replace("\r\n","")
+            response = reply[len('+UID='):].replace("\r\n", "")
             return response
         else:
             return None
