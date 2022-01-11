@@ -501,13 +501,10 @@ class ReceivedMenu(AbstractState):
         if self.device.messages.current_message() is not None:
             address = str(self.device.messages.current_message()["address"])
             data = self.device.messages.current_message()["data"]
-
-
             # there is a current_message to draw
-            self.device.next_screen = "{}{:<6}{:<40}{:<2} {} {}{}".format(self.device.current_screen[0:14], address,
-                                                               data, self.device.current_screen[60:62], last_message,
-                                                                      next_message,self.device.current_screen[66:])
-
+            self.device.next_screen = "{}{:<6}{:<40}{:<2} {} {}{}".format(self.device.next_screen[0:14], address,
+                                                               data, self.device.next_screen[60:62], last_message,
+                                                                      next_message,self.device.next_screen[66:])
 
     def use_keyboard_input(self, kb):
         if kb['d']:
