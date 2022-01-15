@@ -294,7 +294,7 @@ class SetAddress(AbstractState):
         self.device.next_cursor_col = 0
         self.device.toggle_lcd_event_flag()
         self.device.next_screen = ""
-        menu = ("Set addr (0-65535)", "", "enter", "M")
+        menu = ("Set addr (0-65535)", "", " ", "M")
         for item in menu:
             self.device.next_screen += "{:<20}".format(item)
 
@@ -331,9 +331,12 @@ class SetAddress(AbstractState):
 
     def on_enter(self):
         # checks if the the cursor is at 0,0
-        if self.device.next_cursor_row == 2 and self.device.next_cursor_col <= 5:
+        if self.device.next_cursor_row == 1:
+            if self.device.input_buffer != "":
+                self.nextState = MainMenu(self.device)
+                self.device.lora.set_address(self.addr_to_use)
+        if self.device.next_cursor_row == 3:
             self.nextState = MainMenu(self.device)
-            self.device.lora.set_address(self.addr_to_use)
 
     def write_char(self, c):
         addr = None
@@ -393,7 +396,7 @@ class SetNetworkid(AbstractState):
         self.device.next_cursor_col = 0
         self.device.toggle_lcd_event_flag()
         self.device.next_screen = ""
-        menu = ("* Set ntwk (0-16)", "", "enter", "M")
+        menu = ("* Set ntwk (0-16)", "", " ", "M")
         for item in menu:
             self.device.next_screen += "{:<20}".format(item)
 
@@ -430,9 +433,12 @@ class SetNetworkid(AbstractState):
             self.device.input_buffer = self.device.next_input_buffer
 
     def on_enter(self):
-        if self.device.next_cursor_row == 2 and self.device.next_cursor_col <= 5:
+        if self.device.next_cursor_row == 1:
+            if self.device.input_buffer != "":
+                self.nextState = MainMenu(self.device)
+                self.device.lora.set_network_id(self.addr_to_use)
+        if self.device.next_cursor_row == 3:
             self.nextState = MainMenu(self.device)
-            self.device.lora.set_network_id(self.addr_to_use)
 
     def write_char(self, c):
         addr = None
