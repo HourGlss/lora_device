@@ -40,13 +40,13 @@ class Driver(object):
                 state_change = True
                 current_state = state
                 del state
+            # if the state has changed allow the state to set some things up initially after the first draw
+            if state_change:
+                current_state.initial()
             # update screen
             if d.lcd_event_change_detected:
                 current_state.screen()
                 d.print_screen()
-            # if the state has changed allow the state to set some things up initially after the first draw
-            if state_change:
-                current_state.initial()
 
     def test_led_bulb(self):
         test_led = DigitalInOut(board.GP15)

@@ -75,14 +75,17 @@ class ComposeMenu(AbstractState):
         for item in menu:
             self.device.next_screen += "{:<20}".format(item)
 
+
     def screen(self):
         if self.device.input_buffer != self.device.next_input_buffer:
             print("Compose typed a char")
-            self.device.next_screen = "{}{:<55}{}".format(self.device.next_screen[0:5],
+            self.device.next_screen = "{}{:<55}{}".format(self.device.current_screen[0:5],
                                                           self.device.next_input_buffer,
-                                                          self.device.next_screen[60:])
+                                                          self.device.current_screen[60:])
             self.device.input_buffer = self.device.next_input_buffer
+        print(self.device.next_input_buffer)
         if self.device.next_input_buffer == "":
+            print("Composed typed first screen")
             self.device.next_screen = ""
             menu = ("Send:", "", "", "M B")
             for item in menu:
@@ -125,7 +128,7 @@ class ComposeMenu(AbstractState):
         elif self.device.cursor_row == 3 and self.device.cursor_col == 2:
             self.nextState = SendMenu(self.device)
 
-        elif self.device.cursor_row == 0 and self.device.cursor_col <= 5:
+        elif self.device.cursor_row < 3:
             if self.device.input_buffer is not None:
                 self.nextState = SendingMenu(self.device)
                 temp = str(self.device.next_input_buffer)
@@ -172,6 +175,7 @@ class SendingMenu(AbstractState):
         self.device.toggle_lcd_event_flag()
 
     def initial(self):
+        print("SendingMenu inital called")
         self.device.initial_cursor_row = 0
         self.device.initial_cursor_col = 0
         self.device.toggle_lcd_event_flag()
@@ -187,6 +191,7 @@ class SendingMenu(AbstractState):
             self.nextState = SendSuccessful(self.device)
             self.device.data_to_send = {}
         else:
+            print("looping")
             self.nextState = SendingMenu(self.device)
 
 
@@ -553,7 +558,7 @@ class SendMenu(AbstractState):
         self.device.toggle_lcd_event_flag()
         self.device.input_buffer = ""
         self.device.next_input_buffer = ""
-        menu = ("To:", "Compose", " ", "M")
+        menu = ("To:", " ", " ", "M")
         self.device.next_screen = ""
         for item in menu:
             self.device.next_screen += "{:<20}".format(item)
@@ -591,10 +596,11 @@ class SendMenu(AbstractState):
                     break
 
     def on_enter(self):
-        if self.device.cursor_row == 1:
+        if self.device.cursor_row == 0:
             if self.device.input_buffer != "":
                 self.nextState = ComposeMenu(self.device)
                 self.device.data_to_send["address"] = self.addr_to_use
+                self.device.next_input_buffer = ""
 
         if self.device.cursor_row == 3:
             self.nextState = MainMenu(self.device)

@@ -1,37 +1,10 @@
-test = ['a', 'b', 'c']
+current_screen = "Message from:                                               M                  "
+address = "6000"
+data = "hello world"
+last_message = " "
+next_message = "N"
+next_screen = "{}{:<6}{:<40}{:<2} {} {}{}".format(current_screen[0:14], address,
+                                                               data, current_screen[60:62], last_message,
+                                                                      next_message,current_screen[66:])
 
-
-def current_message():
-    global index, test
-    if index < 0:
-        return None
-    try:
-        return test[index]
-    except:
-        return None
-
-
-def next_message():
-    global index, test
-    if index + 1 < 0:
-        return None
-    try:
-        return test[index+1]
-    except:
-        return None
-
-
-def last_message():
-    global index, test
-
-    if index - 1 < 0:
-        return None
-    try:
-        return test[index-1]
-    except:
-        return None
-
-index = 3
-print(last_message())
-print(current_message())
-print(next_message())
+print(next_screen)
