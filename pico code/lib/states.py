@@ -238,7 +238,7 @@ class SettingsMenu(AbstractState):
     def initial(self):
         self.device.toggle_lcd_event_flag()
         self.device.next_screen = ""
-        menu = ("* Set addr (0-65535)", "* Set ntwk (0-16)", "", "M")
+        menu = ("* Set addr (0-65535)", "* Set ntwk (0-16)", "* Set RF Params", "M")
         for item in menu:
             self.device.next_screen += "{:<20}".format(item)
 
@@ -258,6 +258,8 @@ class SettingsMenu(AbstractState):
             self.nextState = SetAddress(self.device)
         if self.device.cursor_row == 1:
             self.nextState = SetNetworkid(self.device)
+        if self.device.cursor_row == 2:
+            self.nextState = SetRFParams(self.device)
         if self.device.cursor_row == 3:
             self.nextState = MainMenu(self.device)
 
@@ -272,8 +274,6 @@ class SettingsMenu(AbstractState):
         self.device.toggle_lcd_event_flag()
         if self.device.cursor_row < self.device.lcd_height - 1:
             self.device.next_cursor_row = self.device.cursor_row + 1
-            if self.device.next_cursor_row == 2:
-                self.device.next_cursor_row += 1
         self.device.next_cursor_col = 0
 
 
@@ -479,6 +479,51 @@ class SetNetworkid(AbstractState):
                 self.device.next_cursor_col = len(self.device.input_buffer)
             else:
                 self.device.next_cursor_col = 0
+
+class SetRFParams(AbstractState):
+    def __init__(self, d):
+        super().__init__(d)
+        self.device.function_toggle = False
+        self.device.next_cursor_row = 0
+        self.device.next_cursor_col = 0
+        self.device.toggle_lcd_event_flag()
+        self.device.input_buffer = ""
+        self.device.next_input_buffer = ""
+        self.addr_to_use = None
+
+    def initial(self):
+        self.device.next_cursor_row = 1
+        self.device.next_cursor_col = 0
+        self.device.toggle_lcd_event_flag()
+        self.device.next_screen = ""
+        menu = ("* Set RF Params", "Less than 3Km", "More than 3Km", "M")
+        for item in menu:
+            self.device.next_screen += "{:<20}".format(item)
+
+    def use_keyboard_input(self, kb):
+        if kb['enter']:
+            self.on_enter()
+            return
+        if kb['s']:
+            self.on_down()
+            return
+        if kb['w']:
+            self.on_up()
+            return
+
+    def on_enter(self):
+        if self.device.next_cursor_row == 1:
+            self.nextState = MainMenu(self.device)
+            self.device.lora.set_rf_parameters(10, 7, 1, 7)
+        if self.device.next_cursor_row == 2:
+            self.nextState = MainMenu(self.device)
+            self.device.lora.set_rf_parameters(12, 4, 1, 7)
+
+    def write_char(self, c):
+        pass
+
+    def delete(self):
+        pass
 
 
 class ReceivedMenu(AbstractState):
