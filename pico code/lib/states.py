@@ -176,6 +176,7 @@ class SendingMenu(AbstractState):
 
     def initial(self):
         print("SendingMenu inital called")
+        self.sending = True
         self.device.initial_cursor_row = 0
         self.device.initial_cursor_col = 0
         self.device.toggle_lcd_event_flag()
@@ -185,14 +186,23 @@ class SendingMenu(AbstractState):
         self.device.next_screen = ""
         for item in menu:
             self.device.next_screen += "{:<20}".format(item)
+        self.send_message()
 
-        if self.device.lora.send(str(self.device.data_to_send["data"]), self.device.data_to_send["address"]):
-            self.last_sent = self.device.data_to_send
-            self.nextState = SendSuccessful(self.device)
-            self.device.data_to_send = {}
-        else:
-            print("looping")
-            self.nextState = SendingMenu(self.device)
+
+
+    def send_message(self):
+        send_count = 0
+        print("Data to send: {}".format(self.device.data_to_send))
+        while self.sending:
+            if self.device.lora.send(str(self.device.data_to_send['data']), self.device.data_to_send['address']):
+                self.last_sent = self.device.data_to_send
+                self.nextState = SendSuccessful(self.device)
+                self.device.data_to_send = {}
+                self.sending = False
+            if send_count == 10:
+                self.nextState = SendFailed(self.device)
+            else:
+                send_count += 1
 
 
 class SendSuccessful(AbstractState):
@@ -223,7 +233,35 @@ class SendSuccessful(AbstractState):
 
     def on_enter(self):
         self.nextState = MainMenu(self.device)
-        pass
+
+class SendFailed(AbstractState):
+
+    def __init__(self, d):
+        super().__init__(d)
+        self.addr_to_use = None
+        self.device.next_cursor_row = 0
+        self.device.next_cursor_col = 0
+        self.device.function_toggle = False
+        self.device.toggle_lcd_event_flag()
+
+    def initial(self):
+        self.device.initial_cursor_row = 0
+        self.device.initial_cursor_col = 0
+        self.device.toggle_lcd_event_flag()
+        self.device.input_buffer = ""
+        self.device.next_input_buffer = ""
+        menu = ("Send Failed", "", "", "")
+        self.device.next_screen = ""
+        for item in menu:
+            self.device.next_screen += "{:<20}".format(item)
+
+    def use_keyboard_input(self, kb):
+        if kb['enter']:
+            self.on_enter()
+            return
+
+    def on_enter(self):
+        self.nextState = MainMenu(self.device)
 
 
 class SettingsMenu(AbstractState):
