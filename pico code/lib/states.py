@@ -189,7 +189,7 @@ class SendingMenu(AbstractState):
         send_count = 0
         while self.sending:
             if self.device.lora.send(
-                    "S:{}/R:{}/{}".format(str(self.addr_to_use), self.device.data_to_send['address'],
+                    "{}/{}/{}".format(str(self.addr_to_use), self.device.data_to_send['address'],
                                           str(self.device.data_to_send['data'])),
                     self.device.data_to_send['address']) and self.device.lora.send(
                 "S:{}/R:{}/{}".format(str(self.addr_to_use), self.device.data_to_send['address'],

@@ -16,21 +16,31 @@ class Driver(object):
         pass
 
     def main(self, repeater=False):
+        repeater_addr = 5
+        repeater_ntwk = 5
         lcd_i2c = busio.I2C(scl=board.GP1, sda=board.GP0)
         lcd = LCD(I2CPCF8574Interface(lcd_i2c, 0x27), num_rows=4, num_cols=20)
         lcd.set_backlight(True)
         lora = RYLR896(rx=board.GP5, tx=board.GP4, name="lora")
-        lora.lazy_config(address=5, network_id=5, parameters=(10, 7, 1, 7))
+        lora.lazy_config(address=repeater_addr, network_id=repeater_ntwk, parameters=(10, 7, 1, 7))
         d = Device(lcd, lora, kbsda=board.GP18, kbscl=board.GP19)
         current_state = MainMenu(d)
+        last_received = None
         while True:
             state_change = False
             # check lora to see if received
             if repeater is True:
-                data_in = lora.read_from_device()
-                lora.send(data_in["actual_data"], 5)
+                current_received = d.lora.read_from_device()
+                if current_received != last_received and last_received is not None:
+                    last_received = current_received
+                    data = last_received["actual_data"].split("/")
+                    d.lora.send(last_received["actual_data"], repeater_addr)
+                    d.lora.send(last_received["actual_data"], int(data[1]))
             else:
-                d.get_message()
+                current_received = d.lora.read_from_device()
+                if current_received != last_received and last_received is not None:
+                    last_received = current_received
+                    d.get_message(last_received)
             # get keyboard input
             if d.use_i2c_kb:
                 kbi = d.get_i2c_keyboard_input()
