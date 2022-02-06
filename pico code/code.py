@@ -15,7 +15,7 @@ class Driver(object):
     def __init__(self):
         pass
 
-    def main(self):
+    def main(self, repeater=False):
         lcd_i2c = busio.I2C(scl=board.GP1, sda=board.GP0)
         lcd = LCD(I2CPCF8574Interface(lcd_i2c, 0x27), num_rows=4, num_cols=20)
         lcd.set_backlight(True)
@@ -26,7 +26,11 @@ class Driver(object):
         while True:
             state_change = False
             # check lora to see if received
-            d.get_message()
+            if repeater is True:
+                data_in = lora.read_from_device()
+                lora.send(data_in["actual_data"], 5)
+            else:
+                d.get_message()
             # get keyboard input
             if d.use_i2c_kb:
                 kbi = d.get_i2c_keyboard_input()
@@ -57,6 +61,9 @@ class Driver(object):
             print("light off")
             test_led.value = False
             time.sleep(1)
+
+
+
 
 
 if __name__ == "__main__":

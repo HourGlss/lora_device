@@ -75,15 +75,12 @@ class ComposeMenu(AbstractState):
         for item in menu:
             self.device.next_screen += "{:<20}".format(item)
 
-
     def screen(self):
         if self.device.input_buffer != self.device.next_input_buffer:
-            print("Compose typed a char")
             self.device.next_screen = "{}{:<55}{}".format(self.device.current_screen[0:5],
                                                           self.device.next_input_buffer,
                                                           self.device.current_screen[60:])
             self.device.input_buffer = self.device.next_input_buffer
-        print(self.device.next_input_buffer)
         if self.device.next_input_buffer == "":
             print("Composed typed first screen")
             self.device.next_screen = ""
@@ -133,8 +130,8 @@ class ComposeMenu(AbstractState):
                 self.nextState = SendingMenu(self.device)
                 temp = str(self.device.next_input_buffer)
                 temp = temp.strip()
-                temp = temp.replace("\r\n","")
-                temp = temp.replace("\n","")
+                temp = temp.replace("\r\n", "")
+                temp = temp.replace("\n", "")
                 self.device.data_to_send["data"] = temp
                 del temp
 
@@ -188,13 +185,15 @@ class SendingMenu(AbstractState):
             self.device.next_screen += "{:<20}".format(item)
         self.send_message()
 
-
-
     def send_message(self):
         send_count = 0
-        print("Data to send: {}".format(self.device.data_to_send))
         while self.sending:
-            if self.device.lora.send(str(self.device.data_to_send['data']), self.device.data_to_send['address']):
+            if self.device.lora.send(
+                    "S:{}/R:{}/{}".format(str(self.addr_to_use), self.device.data_to_send['address'],
+                                          str(self.device.data_to_send['data'])),
+                    self.device.data_to_send['address']) and self.device.lora.send(
+                "S:{}/R:{}/{}".format(str(self.addr_to_use), self.device.data_to_send['address'],
+                                      str(self.device.data_to_send['data'])), 5):
                 self.last_sent = self.device.data_to_send
                 self.nextState = SendSuccessful(self.device)
                 self.device.data_to_send = {}
@@ -233,6 +232,7 @@ class SendSuccessful(AbstractState):
 
     def on_enter(self):
         self.nextState = MainMenu(self.device)
+
 
 class SendFailed(AbstractState):
 
@@ -518,6 +518,7 @@ class SetNetworkid(AbstractState):
             else:
                 self.device.next_cursor_col = 0
 
+
 class SetRFParams(AbstractState):
     def __init__(self, d):
         super().__init__(d)
@@ -603,8 +604,9 @@ class ReceivedMenu(AbstractState):
             data = self.device.messages.current_message()["data"]
             # there is a current_message to draw
             self.device.next_screen = "{}{:<6}{:<40}{:<2} {} {}{}".format(self.device.next_screen[0:14], address,
-                                                               data, self.device.next_screen[60:62], last_message,
-                                                                      next_message,self.device.next_screen[66:])
+                                                                          data, self.device.next_screen[60:62],
+                                                                          last_message,
+                                                                          next_message, self.device.next_screen[66:])
 
     def use_keyboard_input(self, kb):
         if kb['d']:

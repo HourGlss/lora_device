@@ -8,3 +8,7 @@ next_screen = "{}{:<6}{:<40}{:<2} {} {}{}".format(current_screen[0:14], address,
                                                                       next_message,current_screen[66:])
 
 print(next_screen)
+
+w0aas
+wa3gpe
+w1x3mm

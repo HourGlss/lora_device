@@ -252,9 +252,15 @@ class Device(object):
         self.toggle_lcd_event_flag()
 
     def get_message(self):
+        """
+        TODO need to check if getting a duplicate message from repeater
+        :return:
+        """
         data_in = self.lora.read_from_device()
         if data_in is not None:
-            self.messages.add(data_in)
+            if self.messages[-1] != data_in:
+                self.messages.add(data_in)
+
 
 
 if __name__ == "__main__":
