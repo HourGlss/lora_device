@@ -600,8 +600,10 @@ class ReceivedMenu(AbstractState):
             next_message = "N"
 
         if self.device.messages.current_message() is not None:
-            address = str(self.device.messages.current_message()["address"])
             data = self.device.messages.current_message()["data"]
+            data = data.split("/")
+            data = data[2]
+            address = data[0]
             # there is a current_message to draw
             self.device.next_screen = "{}{:<6}{:<40}{:<2} {} {}{}".format(self.device.next_screen[0:14], address,
                                                                           data, self.device.next_screen[60:62],
