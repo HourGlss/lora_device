@@ -407,7 +407,7 @@ class RYLR896:
             if data is not None:
                 print("{} send reply breaking due to data not None {}".format(self.name, data))
                 break
-            if now - start > 3:
+            if now - start > 15:
                 if self.__debug:
                     print("{} send reply timing out".format(self.name))
                 break
